@@ -1,0 +1,126 @@
+{
+  "spec": "v1",
+  "description": "signature from MockBeacon; randomness = sha256(signature); targets per SPEC section 8",
+  "cases": [
+    {
+      "name": "round-1000",
+      "input": {
+        "round": 1000,
+        "signature": "93ec9133518d759db63f36e3e4f59ce505ccda130ae59b2dd2259f5dec5e1a50",
+        "test_id": "card5",
+        "batch_id": "000102030405060708090a0b0c0d0e0f"
+      },
+      "output": {
+        "randomness": "09ea6bf431e7d606472adf98eb087b91ebeb261b67920c3a1c81d092d0d35bd0",
+        "first_hash": "d899486fd9b04da6ba1bf63a2bc45b5b9343402adb723bfb42a6f5faffac8f97",
+        "targets": [
+          3,
+          3,
+          4,
+          1,
+          3,
+          3,
+          0,
+          2,
+          2,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          4,
+          4,
+          1,
+          1,
+          2,
+          1,
+          4,
+          3,
+          4,
+          3
+        ]
+      }
+    },
+    {
+      "name": "round-1",
+      "input": {
+        "round": 1,
+        "signature": "2a3d346c50432455db07eaf52cc3849e8f9a687d24f556dcd4a16adc1f59bc7f",
+        "test_id": "card5",
+        "batch_id": "00000000000000000000000000000000"
+      },
+      "output": {
+        "randomness": "46310f35fd1cc48a3ad35e3f3f8d72f19a802e8d1d350cbae6ee7a1a0c1a21c1",
+        "first_hash": "9d99b84c2f829973f8db19567fac7711a76236ac6a2bafc9e9ca10293f35228e",
+        "targets": [
+          0,
+          3,
+          2,
+          1,
+          1,
+          0,
+          4,
+          3,
+          1,
+          0,
+          3,
+          3,
+          4,
+          4,
+          1,
+          0,
+          3,
+          4,
+          0,
+          0,
+          3,
+          4,
+          2,
+          3,
+          3
+        ]
+      }
+    },
+    {
+      "name": "other-test-id",
+      "input": {
+        "round": 1000,
+        "signature": "93ec9133518d759db63f36e3e4f59ce505ccda130ae59b2dd2259f5dec5e1a50",
+        "test_id": "card7",
+        "batch_id": "000102030405060708090a0b0c0d0e0f"
+      },
+      "output": {
+        "randomness": "09ea6bf431e7d606472adf98eb087b91ebeb261b67920c3a1c81d092d0d35bd0",
+        "first_hash": "ab24f89608d7ed5b3f747c5df673030edc0b8164a4173308f380495590cf79df",
+        "targets": [
+          1,
+          1,
+          2,
+          0,
+          0,
+          2,
+          2,
+          4,
+          3,
+          1,
+          0,
+          2,
+          4,
+          0,
+          4,
+          2,
+          1,
+          1,
+          4,
+          4,
+          0,
+          2,
+          4,
+          0,
+          3
+        ]
+      }
+    }
+  ]
+}

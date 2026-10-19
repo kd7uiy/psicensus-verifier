@@ -1,0 +1,119 @@
+{
+  "spec": "v1, amendment 17, approved by Ben 2026-10-16",
+  "tag": "precog/canary/v1",
+  "description": "A player row carries the canary guesses of a candidate slot: every whole minute m >= 0 with sealed_at_ms - 600000 <= m <= sealed_at_ms, and test_id card5. slot_ms is the lowest matching slot, or null.",
+  "cases": [
+    {
+      "name": "same_minute",
+      "guesses": "4334440410342304433244133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": "1791852060000"
+    },
+    {
+      "name": "nine_minutes_back",
+      "guesses": "4021241024331114143440442",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": "1791851520000"
+    },
+    {
+      "name": "ten_minutes_17s_back_outside",
+      "guesses": "0130434244000224103020133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": null
+    },
+    {
+      "name": "future_slot_outside",
+      "guesses": "4442111131232421410243302",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": null
+    },
+    {
+      "name": "sealed_on_minute_slot_equal",
+      "guesses": "4334440410342304433244133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852060000",
+      "slot_ms": "1791852060000"
+    },
+    {
+      "name": "sealed_on_minute_ten_back_inside",
+      "guesses": "0130434244000224103020133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852060000",
+      "slot_ms": "1791851460000"
+    },
+    {
+      "name": "sealed_on_minute_eleven_back_outside",
+      "guesses": "4014123223114104323242041",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852060000",
+      "slot_ms": null
+    },
+    {
+      "name": "sealed_one_ms_after_the_ten_minute_edge",
+      "guesses": "0130434244000224103020133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852060001",
+      "slot_ms": null
+    },
+    {
+      "name": "sealed_one_ms_before_the_slot",
+      "guesses": "4334440410342304433244133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852059999",
+      "slot_ms": null
+    },
+    {
+      "name": "other_test_id",
+      "guesses": "4334440410342304433244133",
+      "test_id": "other",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": null
+    },
+    {
+      "name": "first_digit_changed",
+      "guesses": "0334440410342304433244133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": null
+    },
+    {
+      "name": "last_digit_changed",
+      "guesses": "4334440410342304433244134",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": null
+    },
+    {
+      "name": "middle_digit_changed",
+      "guesses": "4334440410343304433244133",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": null
+    },
+    {
+      "name": "near_time_zero",
+      "guesses": "2303143403340110340033443",
+      "test_id": "card5",
+      "sealed_at_ms": "180005",
+      "slot_ms": "0"
+    },
+    {
+      "name": "time_zero_sealed_at_zero",
+      "guesses": "2303143403340110340033443",
+      "test_id": "card5",
+      "sealed_at_ms": "0",
+      "slot_ms": "0"
+    },
+    {
+      "name": "player_style_guesses",
+      "guesses": "0123401234012340123401234",
+      "test_id": "card5",
+      "sealed_at_ms": "1791852077000",
+      "slot_ms": null
+    }
+  ]
+}

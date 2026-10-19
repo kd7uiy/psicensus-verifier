@@ -1,0 +1,43 @@
+{
+ "format": "precog-canary-vectors/v1",
+ "generated_by": "scripts/canary/gen_canary_vectors.mjs",
+ "tag": "precog/canary/v1",
+ "rule": "guess[i] = u64(sha256(TAG || u64(slot_ms) || u32(i))[0:8]) mod 5, i = 0..24",
+ "cases": [
+  {
+   "name": "slot_zero",
+   "slot_ms": "0",
+   "guesses": "2303143403340110340033443"
+  },
+  {
+   "name": "slot_one_minute",
+   "slot_ms": "60000",
+   "guesses": "3422224242004013101320022"
+  },
+  {
+   "name": "slot_2026_real",
+   "slot_ms": "1791852060000",
+   "guesses": "4334440410342304433244133"
+  },
+  {
+   "name": "slot_2026_real_00_41",
+   "slot_ms": "1791852060000",
+   "guesses": "4334440410342304433244133"
+  },
+  {
+   "name": "slot_2027_01_01",
+   "slot_ms": "1798761600000",
+   "guesses": "2113244410311010414404101"
+  },
+  {
+   "name": "slot_2_pow_53_whole_minute",
+   "slot_ms": "9007199254740000",
+   "guesses": "0411300303332221442434411"
+  },
+  {
+   "name": "slot_u64_max_whole_minute",
+   "slot_ms": "18446744073709500000",
+   "guesses": "2312024443142010310040241"
+  }
+ ]
+}

@@ -1,0 +1,1048 @@
+{
+  "version": 1,
+  "genesis_ms": 1700049600000,
+  "cases": [
+    {
+      "name": "ok_sha256",
+      "file": "tokens/ok_sha256.tsr",
+      "digest": "8dabbe3086d267f47905a2f72c03f6a8d3c6e102eeac2ac8fc7794c205b43c00",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_sha384_pki_b",
+      "file": "tokens/ok_sha384_pki_b.tsr",
+      "digest": "a24129b5d2ddb41179aef71e745f736eb4776f2968f0d57b02db7e5c4df16c83",
+      "entry": {
+        "issuing_ca_sha256": [
+          "d9cd9fb2cdd5fa055b2dc68f17dcadfdc20d4829522d0c89a4bcae5ec4f55fb0"
+        ],
+        "root_sha256": "eb15769f022e0190262e3ae4cd30fe745e6e4a8492068c2d20bff1cd7b79e52e"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049723456
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_sha512",
+      "file": "tokens/ok_sha512.tsr",
+      "digest": "325591720b4ac9b04f01b13905b0bdb1634d14e58d5c33a45b7809de871afeb3",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_fraction",
+      "file": "tokens/ok_fraction.tsr",
+      "digest": "69a697adc58b979d25fd4cf64ebd80b092102a628ea2324a06d3bc60dd7d6733",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600130
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_sid_ski",
+      "file": "tokens/ok_sid_ski.tsr",
+      "digest": "c9b7d8ec8bd9e6f1a270192e93fc2ccf29400d6d23a0190a2d69d7fbefc1f370",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-cms-verify-ok"
+    },
+    {
+      "name": "ok_ess_v1",
+      "file": "tokens/ok_ess_v1.tsr",
+      "digest": "f2df69da2160ad74a923eb5db3d9947abea15e1d24853a1ea0d761a8330d19ec",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_ess_both",
+      "file": "tokens/ok_ess_both.tsr",
+      "digest": "b9eaf8398520aafa33ce0bf98a93818b5c0f51344f4b4e44bd6a97fe34207cdb",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_bare_content_info",
+      "file": "tokens/ok_bare_content_info.tsr",
+      "digest": "8168b54eae31eb2403a603243c7a1a43f537dee30c9bd844d2386f303c7f2311",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_one_intermediate",
+      "file": "tokens/ok_one_intermediate.tsr",
+      "digest": "804e6f8f6e931519482b6f6fe207b3bbda84946faef2c149742fa27ad2149283",
+      "entry": {
+        "issuing_ca_sha256": [
+          "22951b909c48871de49bb2ba247a3b976fca94c1e841ef156d57f89301fce067"
+        ],
+        "root_sha256": "f08126dadf6df84bcd12c4758ae0cc2e69ea1d7cb83681da0b65ec52c356f022"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_two_intermediates",
+      "file": "tokens/ok_two_intermediates.tsr",
+      "digest": "5d71609a5469e0551ec7e17e8f178cf35b920cce374ceecd2e88ffffab2723d1",
+      "entry": {
+        "issuing_ca_sha256": [
+          "d51608250435e39935c8c66116d9aaed1a36e3580385e57011ffa113fbec7006"
+        ],
+        "root_sha256": "425510baa91314ef7026ee538d2ecd826f5c87994f8f3d9adbb0929ddafaa163"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "ok_embedded_root_ignored",
+      "file": "tokens/ok_embedded_root_ignored.tsr",
+      "digest": "537764f7c5754a7e44e4de430c05f2eaf93ea6d97490f83e18b39f72714c5dde",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1700049600000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    },
+    {
+      "name": "bad_signature_bit",
+      "file": "tokens/bad_signature_bit.tsr",
+      "digest": "b157ee13e92343446780c7a9645a66e38c7d0f5dc8f4e83ff90deb865e182497",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "signature"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_message_digest_attr",
+      "file": "tokens/bad_message_digest_attr.tsr",
+      "digest": "0dd1c5d8454c34bad5141b9660a36e5138cc5acd4d4c90b529c29318388b0e91",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "message_digest"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ess_cert_id_v2",
+      "file": "tokens/bad_ess_cert_id_v2.tsr",
+      "digest": "17404974913f02eaf809e53a488d384d8b0c2c14a1ab680067ab8f5e71cd5b68",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ess_cert_id"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ess_cert_id_v1",
+      "file": "tokens/bad_ess_cert_id_v1.tsr",
+      "digest": "1b3d0b756524b453942f1799b2946a502a66e8e298da78caff3dc24102452c6a",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ess_cert_id"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_signer_expired",
+      "file": "tokens/bad_signer_expired.tsr",
+      "digest": "edadb972b6c5032312f24f62decadb8c4497bc16d2f744d2bbd14924905912a5",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "validity"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_not_yet_valid",
+      "file": "tokens/bad_ca_not_yet_valid.tsr",
+      "digest": "716c83d0da82b2d98232593dd666a9e50c2c552f6a5fdd2cbd8540db630a24f3",
+      "entry": {
+        "issuing_ca_sha256": [
+          "8f86a8c654438a667a62bf75a8b7b3273acaf1077d3853aa5b37ca95900f21ad"
+        ],
+        "root_sha256": "5ade3a475c78127df02e9d3fe2e4db99d90d7e42af47f43ca933ad44e1b19d49"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "validity"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_root_expired",
+      "file": "tokens/bad_root_expired.tsr",
+      "digest": "cc45c26d2412813abea77fafb02b3fc536b75c36ec43ce916f6bfeaf9abb6501",
+      "entry": {
+        "issuing_ca_sha256": [
+          "2ec40b10fa9ade7ecdd60fbf5f23f92e7b88042b74ca3214d5bf74beb628a7eb"
+        ],
+        "root_sha256": "9f169120e1a39f60b9369e6ab1e834f38104c1a052914d225957afa5ddb65cd5"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "validity"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_not_pinned",
+      "file": "tokens/bad_ca_not_pinned.tsr",
+      "digest": "15fb92641863b404a34c0b5189b5c8e5ea5759547f5fcf82067a95febf487552",
+      "entry": {
+        "issuing_ca_sha256": [
+          "d9cd9fb2cdd5fa055b2dc68f17dcadfdc20d4829522d0c89a4bcae5ec4f55fb0"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca_pin"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_root_pin_mismatch",
+      "file": "tokens/bad_root_pin_mismatch.tsr",
+      "digest": "b55ad2429c62cac67e9868035ee72b0cb23913256afdef373ba925a3a7155caa",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "eb15769f022e0190262e3ae4cd30fe745e6e4a8492068c2d20bff1cd7b79e52e"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_eku_noncritical",
+      "file": "tokens/bad_eku_noncritical.tsr",
+      "digest": "5e7757e70f3a8a4d3a1d49f2e7c5aeb977402f8f452cc68722244ea12598bbcb",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "eku"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_eku_extra_purpose",
+      "file": "tokens/bad_eku_extra_purpose.tsr",
+      "digest": "e33a1ce1ea39445b52903aa502c8b50bcbeb01d988aed12b7332fc86cd2d060b",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "eku"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_eku_missing",
+      "file": "tokens/bad_eku_missing.tsr",
+      "digest": "75d8ce2be31f2d22f863514585dee5736a7edf44cd66486ed1664b7121e4ba2f",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "eku"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_second_signer_info",
+      "file": "tokens/bad_second_signer_info.tsr",
+      "digest": "3d5d01c51c05f8ab85f95424217a4b05522f04c490025c078d9116aab5db87a3",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "signer_count"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_pss_signer",
+      "file": "tokens/bad_pss_signer.tsr",
+      "digest": "c8309deebb14719981e1b864246b371dfce412cc472c9749666ed23c3aa7d810",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "unsupported"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ecdsa_signer",
+      "file": "tokens/bad_ecdsa_signer.tsr",
+      "digest": "bc655a86648a7e257523177f3670aff419221b037c1fefbcce2855288110fe79",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "unsupported"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ec_issuing_ca",
+      "file": "tokens/bad_ec_issuing_ca.tsr",
+      "digest": "0221c6336167bd8164092022c24eaf54516b330a13e989fba8faa3189ee13da1",
+      "entry": {
+        "issuing_ca_sha256": [
+          "dc6c7098e2eab3486642a5271fcc90f3f7b74754c92c6381aa76536ec547ca60"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "unsupported"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_unknown_critical_ext",
+      "file": "tokens/bad_unknown_critical_ext.tsr",
+      "digest": "ca0e1c6ad9ce008c52d742d8e58f9b724a64b2be65cde2a972418f3e832024e8",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "critical_extension"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_signer_is_ca",
+      "file": "tokens/bad_signer_is_ca.tsr",
+      "digest": "0a4351be502cb3476b42db07f47ef5bb2a329817bff91be8a22eb8504819066d",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_signer_ku_no_signing",
+      "file": "tokens/bad_signer_ku_no_signing.tsr",
+      "digest": "81be157849b4389c280e02ce33d2249842e97b13d593453e61bf8a6a1dbbf56e",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "key_usage"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_not_ca",
+      "file": "tokens/bad_ca_not_ca.tsr",
+      "digest": "0be9f7ff3a5e5f8be7b2684c317bf2aaf18830621ec9e68c9826da087d4c9a89",
+      "entry": {
+        "issuing_ca_sha256": [
+          "a7c9a8f85ccf95e3517e502f93cbfb68cbe87d8bbb9335c1be469cf8791bfa44"
+        ],
+        "root_sha256": "1f7a4c7e410595c8039d62df43973323236036a4dfe72d6adf978ab4b2bf6037"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_no_keycertsign",
+      "file": "tokens/bad_ca_no_keycertsign.tsr",
+      "digest": "ee9a695cc09ff444a21a2fb3a3efd8d2c63b5b919eb43fa3aa13c88580b7aab8",
+      "entry": {
+        "issuing_ca_sha256": [
+          "e77b65f7ce2a19e80d880c038091ccdad399e90dcb8b2f1ca600caf0416d8baf"
+        ],
+        "root_sha256": "b6bcb3c0f27422bb32e07da82eceeb50bd6347cc7a3bb522e37b1d6cdc5dbe1b"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_no_basic_constraints",
+      "file": "tokens/bad_ca_no_basic_constraints.tsr",
+      "digest": "f613ade54ace1b54e0889088d3d3201066273c30eb69522817ca40510841b35c",
+      "entry": {
+        "issuing_ca_sha256": [
+          "5aa4f10bb4b79e725809f9d915428dc9c3e972ca7fe65625c4cbf3c0454af26e"
+        ],
+        "root_sha256": "838f48e1c505da27dcd88baae9b5b76b950cafe34eb4f879f9623081c4a29969"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_pathlen",
+      "file": "tokens/bad_pathlen.tsr",
+      "digest": "fe679afd2d7c0ca7c4fe6b1f1f94bcced6d405f61fa937a278ed4cb651c803e4",
+      "entry": {
+        "issuing_ca_sha256": [
+          "0a5ea975283154456b51fcf7c0c0346f6e178995b85bdd8f835bc3ce8d3dd122"
+        ],
+        "root_sha256": "976ca2cca35b4ab24b71eeaf459098e67f47bc01a047fcf266ce3ce31e2fcc57"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_intermediate_expired",
+      "file": "tokens/bad_intermediate_expired.tsr",
+      "digest": "bf84950904d01c55608db868dbe458853b815b8be9ba1894c48c9124e5b08853",
+      "entry": {
+        "issuing_ca_sha256": [
+          "b6bb129d950375a789b81b59ebdf5fbb80bf3812d76adaf03a8fc9ab6f8e19ff"
+        ],
+        "root_sha256": "7ee74f24bdcedb9840bfbfadf21913631b2d997df621ff62f9b4ec273c8b01f4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "validity"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_intermediate_not_ca",
+      "file": "tokens/bad_intermediate_not_ca.tsr",
+      "digest": "30e6cd930a9d1a183fad0e1aa52312f32a33d99e9c0a44c63ac889b674a98e99",
+      "entry": {
+        "issuing_ca_sha256": [
+          "711cba3ef50f313be335465c542fe0faabce9ba5151af764746ae2400d73498a"
+        ],
+        "root_sha256": "f0ef42e727b8612fb59dd86fa23457c5334bfc5dcbfd825e577e02841e2f94c2"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_intermediate_no_keycertsign",
+      "file": "tokens/bad_intermediate_no_keycertsign.tsr",
+      "digest": "6d962b7d9fc9f1f80335c0281939e82b23bc026b2a3382c33e99d9107ab4cd20",
+      "entry": {
+        "issuing_ca_sha256": [
+          "e430bcc65543b8b85e276f5aff74cb8173fe63f2bcb67a0905509a0a17838b3b"
+        ],
+        "root_sha256": "64f20061df042d484de22e4dfdee86e9951b4b411bd6269ed66c02345b7242b5"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_intermediate_unknown_critical",
+      "file": "tokens/bad_intermediate_unknown_critical.tsr",
+      "digest": "eb1d3ad652f70ce784c75422dea25e0023509f1cc6fb5ac53500f20db78edd2a",
+      "entry": {
+        "issuing_ca_sha256": [
+          "fe2f58185abb7e77c711189511333a88dcb8ed6007834ff8e6cb2466fa915b4a"
+        ],
+        "root_sha256": "271445aafe6de0cf0b213e26d69331bab3197dfdf8c114fd00c2dccd306fb700"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "critical_extension"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_unknown_critical",
+      "file": "tokens/bad_ca_unknown_critical.tsr",
+      "digest": "f865d74c18eb6a7f21f2d058962cab4e8e6e425661d645be44b17b7ca23d46d0",
+      "entry": {
+        "issuing_ca_sha256": [
+          "23b70668104091166a11397f7be7f9709a9f6cbee43a002b759137a33b79d38e"
+        ],
+        "root_sha256": "f55b1da3b0d1508f24fade11c160caf345a02e4c00b5b59caae768f0d5e4f066"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "critical_extension"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_root_unknown_critical",
+      "file": "tokens/bad_root_unknown_critical.tsr",
+      "digest": "d834ffba93ae95244ede1e6dbf966a82597a16895caba7a6cb9d168a32d789ed",
+      "entry": {
+        "issuing_ca_sha256": [
+          "93411ce7c2c4e0edb8ddeb9b1c556758461bbf7f94e3182498cef5bfb9743823"
+        ],
+        "root_sha256": "10bf81684c3c5efafb6d685b8952fa20fe4413c76c9a9b6538246d9af9551c0c"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "critical_extension"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_root_not_ca",
+      "file": "tokens/bad_root_not_ca.tsr",
+      "digest": "6e8e7256e41a0deb11af1b15ecd9b38a6e3dd90dd27d2f9660c82bb79547dfc2",
+      "entry": {
+        "issuing_ca_sha256": [
+          "a81f6a27f834f668b09163d6aade54451ac3c9578ff72aae900258d52c050a5a"
+        ],
+        "root_sha256": "7d3a7421cebe89ea4634be85000c6588890ba2600761c2aa193e2f1d9dc13d87"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_root_no_keycertsign",
+      "file": "tokens/bad_root_no_keycertsign.tsr",
+      "digest": "027e575d102897d982f48a5646299b0a863efc2592ea7895df3f5f9e2432f3ff",
+      "entry": {
+        "issuing_ca_sha256": [
+          "8267a5adfc4b74a89d2e72e6e49ec4f22b327b45eee477a8f4f14d3be9c66029"
+        ],
+        "root_sha256": "4a943965337bef6ed338840de7f72fcd01129942ab61146f3a6e47c532e10eb9"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_three_intermediates",
+      "file": "tokens/bad_three_intermediates.tsr",
+      "digest": "971d415627f3deca9cd66fbde56467477a637662fb077c8ea40da122987ff06f",
+      "entry": {
+        "issuing_ca_sha256": [
+          "07d7a6be1e0ad331825ce0f788678c281bc52fc15e64eddff9ddb903d77bbf35"
+        ],
+        "root_sha256": "78fc7e37fb8ddeeba1c55ec5ace85559f44236898eb2dc6fb5c382eaccd9503a"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_no_certs",
+      "file": "tokens/bad_no_certs.tsr",
+      "digest": "bf76feef3157147ab179b2ce548a5633453fdbf88baa7e885af733467efda3f7",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "signer"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_sid_not_found",
+      "file": "tokens/bad_sid_not_found.tsr",
+      "digest": "ef13abac25daf31480aa06c2ffd710d7c2ff13726f576e88db3f4ab43eaebab0",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "signer"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_content_type_attr",
+      "file": "tokens/bad_content_type_attr.tsr",
+      "digest": "0d0d2e783d1d6da371b4af4e64145567e6fde91278583bd53d98b692fd076b7e",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "content_type"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_econtent_type",
+      "file": "tokens/bad_econtent_type.tsr",
+      "digest": "2454ecd26772be83780b3209694a70f2ee939967f81f4eb2eb6fe440fe265a55",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "content_type"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_wrong_imprint",
+      "file": "tokens/bad_wrong_imprint.tsr",
+      "digest": "eabf5280d809e0e6388ab3fdc685e32caf2141a161fe37a79a0aed123245e56c",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.wrong_imprint",
+        "reason": "imprint"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_not_granted",
+      "file": "tokens/bad_not_granted.tsr",
+      "digest": "07166dfba42e635318aee0af204e8765d7159e418476b220694939160ceafdcd",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "not_granted"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_missing_signed_attrs",
+      "file": "tokens/bad_missing_signed_attrs.tsr",
+      "digest": "77c8d15cf6fdf3c909aad3007868ed58536cc1df2b3e863fef69c27862161ab4",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "malformed"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_unsupported_digest_alg",
+      "file": "tokens/bad_unsupported_digest_alg.tsr",
+      "digest": "f2ce60248d6a76d7ac4e5fc7b729bbb0f228e6e61ee194a4bc7a6e3baa6423a8",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "unsupported"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_sigalg_hash_mismatch",
+      "file": "tokens/bad_sigalg_hash_mismatch.tsr",
+      "digest": "08a98aa12d06e1aba54ee4a3d8c45d4da533b3e564629d152378e879964a5560",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "unsupported"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ess_missing",
+      "file": "tokens/bad_ess_missing.tsr",
+      "digest": "959bf06937039f0eef2eee77e9477b78d3ab9d20b0829459c08c1baa85e15441",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ess_cert_id"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_signer_cert_signature",
+      "file": "tokens/bad_signer_cert_signature.tsr",
+      "digest": "38469e2944f77206817111334155d8fcc582e50394987bc86c20e0eaca01dcbe",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_cert_signature",
+      "file": "tokens/bad_ca_cert_signature.tsr",
+      "digest": "b31c2d6b2e563bc0a08e071db0bd554176cc69d17ee7898714a134edc1845eb1",
+      "entry": {
+        "issuing_ca_sha256": [
+          "932b50c205d60204ea48283b49d6c6c3b2fb9e8369f69fa4ac0d710dc6c2c8d7"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_ca_signature_under_intermediate",
+      "file": "tokens/bad_ca_signature_under_intermediate.tsr",
+      "digest": "346be895260d5f15b59bae089a0ab0da536ff3e41efbde92ca24fdac760c5faf",
+      "entry": {
+        "issuing_ca_sha256": [
+          "c783c00a4ad710a77bd6ce3387eed216260ba76d7b87411df81c1f86f051e9a5"
+        ],
+        "root_sha256": "f08126dadf6df84bcd12c4758ae0cc2e69ea1d7cb83681da0b65ec52c356f022"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_intermediate_cert_signature",
+      "file": "tokens/bad_intermediate_cert_signature.tsr",
+      "digest": "250792e912a6e59bad85405a993f607bad6a35cbf682a8a086774f2675b1a646",
+      "entry": {
+        "issuing_ca_sha256": [
+          "22951b909c48871de49bb2ba247a3b976fca94c1e841ef156d57f89301fce067"
+        ],
+        "root_sha256": "f08126dadf6df84bcd12c4758ae0cc2e69ea1d7cb83681da0b65ec52c356f022"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_root_name_mismatch",
+      "file": "tokens/bad_root_name_mismatch.tsr",
+      "digest": "7fc56b0f9ec4d1f569e2268c3290acea9bdc266402b250b642a7da1b6ab60369",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "6b6a62a1a4a1e42c7cca45c901eba542fcdce84613bd64c6fd0645ab2022e6d5"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_root_wrong_key",
+      "file": "tokens/bad_root_wrong_key.tsr",
+      "digest": "e42212cda4933eddb5a190c4710bcd5692b82bd09fef693fff79cdd0a8174b7d",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "da00532d90243ebbf29d9b5400260a85b51b559df4e20e89848f8749ee3409b1"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_signer_issuer_name_mismatch",
+      "file": "tokens/bad_signer_issuer_name_mismatch.tsr",
+      "digest": "23f324a00247997513726f0ea06db451bc2410ba7c0bde756e39cafc4f00a37b",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "ca_pin"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "bad_intermediate_name_mismatch",
+      "file": "tokens/bad_intermediate_name_mismatch.tsr",
+      "digest": "073bdfc99cce3f7c6b3b707ad5013ddac865b851cb78b9eba9d91cdcb4e49993",
+      "entry": {
+        "issuing_ca_sha256": [
+          "22951b909c48871de49bb2ba247a3b976fca94c1e841ef156d57f89301fce067"
+        ],
+        "root_sha256": "f08126dadf6df84bcd12c4758ae0cc2e69ea1d7cb83681da0b65ec52c356f022"
+      },
+      "expect": {
+        "ok": false,
+        "code": "tsa.invalid",
+        "reason": "chain"
+      },
+      "oracle": "not-applicable"
+    },
+    {
+      "name": "ok_openssl_native",
+      "file": "tokens/ok_openssl_native.tsr",
+      "digest": "5813438a29d9f85fbbf17f755f4c74d04072f88368b7d34ac73072edb9bf955d",
+      "entry": {
+        "issuing_ca_sha256": [
+          "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+        ],
+        "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1791158014000
+      },
+      "oracle": "openssl-ts-verify-ok"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "format": "precog-release/v1",
+  "release_id": "test-real-fixtures-2026-10-05",
+  "registration_ms": 0,
+  "beacon": {
+    "network": "drand-quicknet",
+    "chain_hash": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+    "genesis": 1692803367,
+    "period": 3,
+    "margin_rounds": 2
+  },
+  "authorities": [
+    {
+      "id": "digicert",
+      "kind": "rfc3161",
+      "name": "DigiCert",
+      "issuing_ca_sha256": [
+        "ca0b1554ecd901ea19dcad8749e9f2648c8d6dfcea1add9d2c2109415bb82ccd"
+      ],
+      "root_sha256": "552f7bdcf1a7af9e6ce672017f4f12abf77240c78e761ac203d1d9d20ac89988"
+    },
+    {
+      "id": "globalsign",
+      "kind": "rfc3161",
+      "name": "GlobalSign",
+      "issuing_ca_sha256": [
+        "52373a21b95b5e6de12a2bcf0ffb7d6a633b4caad725f64f6236fbe989dbc29e"
+      ],
+      "root_sha256": "2bcbbfd66282c680491c8cd7735fdbbab7a8079b127bec60c535976834399af7"
+    }
+  ],
+  "with_participants": false
+}

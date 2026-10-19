@@ -1,0 +1,45 @@
+{
+  "spec": "v1",
+  "description": "leaf = sha256(TAG || batch_id || str8(test_id) || guesses || u64(sealed_at_ms))",
+  "cases": [
+    {
+      "name": "typical",
+      "input": {
+        "batch_id": "000102030405060708090a0b0c0d0e0f",
+        "test_id": "card5",
+        "guesses": "0123401234012340123401234",
+        "sealed_at_ms": 1700000000000
+      },
+      "output": {
+        "preimage": "707265636f672f6c6561662f7631000102030405060708090a0b0c0d0e0f056361726435000102030400010203040001020304000102030400010203040000018bcfe56800",
+        "leaf": "ae753c65bf14ad76c180467b48986776a7a13c49b6bfcae7acfcafc3faa38200"
+      }
+    },
+    {
+      "name": "all-zero",
+      "input": {
+        "batch_id": "00000000000000000000000000000000",
+        "test_id": "card5",
+        "guesses": "0000000000000000000000000",
+        "sealed_at_ms": 0
+      },
+      "output": {
+        "preimage": "707265636f672f6c6561662f763100000000000000000000000000000000056361726435000000000000000000000000000000000000000000000000000000000000000000",
+        "leaf": "b2e315af87b6b2c939436d2ba9bfd407ac4686e32b56b1f1d1547079781af786"
+      }
+    },
+    {
+      "name": "max-values",
+      "input": {
+        "batch_id": "ffffffffffffffffffffffffffffffff",
+        "test_id": "a_b-c9",
+        "guesses": "4444444444444444444444444",
+        "sealed_at_ms": 18446744073709551615
+      },
+      "output": {
+        "preimage": "707265636f672f6c6561662f7631ffffffffffffffffffffffffffffffff06615f622d633904040404040404040404040404040404040404040404040404ffffffffffffffff",
+        "leaf": "fe095cb6b0729aa1536dc2d09554bbbc341ddfad48430253ffd4f187e2fd0d0b"
+      }
+    }
+  ]
+}

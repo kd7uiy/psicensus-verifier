@@ -1,0 +1,30 @@
+{
+  "spec": "v1",
+  "description": "MockTSA (kind mock-hmac). Test keys only; a mock token proves nothing",
+  "cases": [
+    {
+      "name": "tsa-a-token",
+      "input": {
+        "tsa_id": "tsa-a",
+        "key_ascii": "precog-mock-tsa-key/tsa-a",
+        "anchor_hash": "cb65e5ddbcde5f797f5c76eedb31e21d4935ae0b57ce59120f10be2689e9bd4d",
+        "gen_time_ms": 1700000000000
+      },
+      "output": {
+        "token": "eyJhbmNob3JfaGFzaCI6ImNiNjVlNWRkYmNkZTVmNzk3ZjVjNzZlZWRiMzFlMjFkNDkzNWFlMGI1N2NlNTkxMjBmMTBiZTI2ODllOWJkNGQiLCJnZW5fdGltZV9tcyI6MTcwMDAwMDAwMDAwMCwibWFjIjoiMDljYWFiNThmODY1YmQyYjExM2ZmMGVkYjkwOTRlODE5Y2NhMmRjZGEyZWNiNjI4MTRmMjc5ODYzYWU3NDU3OSIsInRzYV9pZCI6InRzYS1hIn0="
+      }
+    },
+    {
+      "name": "tsa-b-token",
+      "input": {
+        "tsa_id": "tsa-b",
+        "key_ascii": "precog-mock-tsa-key/tsa-b",
+        "anchor_hash": "cb65e5ddbcde5f797f5c76eedb31e21d4935ae0b57ce59120f10be2689e9bd4d",
+        "gen_time_ms": 1700000000750
+      },
+      "output": {
+        "token": "eyJhbmNob3JfaGFzaCI6ImNiNjVlNWRkYmNkZTVmNzk3ZjVjNzZlZWRiMzFlMjFkNDkzNWFlMGI1N2NlNTkxMjBmMTBiZTI2ODllOWJkNGQiLCJnZW5fdGltZV9tcyI6MTcwMDAwMDAwMDc1MCwibWFjIjoiOTEwNjJkMzkzYzNlZDMwYzdiYzM1ZDc1ZjYwMDU5M2UxOGI4MWQ4Mzk3MmRhMTBjNmYxMTVlMDJjZDY4YWRlZCIsInRzYV9pZCI6InRzYS1iIn0="
+      }
+    }
+  ]
+}

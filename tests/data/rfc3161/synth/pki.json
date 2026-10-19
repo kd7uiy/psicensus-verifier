@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "pkis": {
+    "a": {
+      "root_file": "a_root.der",
+      "ca_file": "a_ca.der",
+      "signer_file": "a_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "c9b418308420b111f7e2fc2a25c2ebd5eb6841d4761db06f63df550582d12e45",
+      "intermediates": []
+    },
+    "b": {
+      "root_file": "b_root.der",
+      "ca_file": "b_ca.der",
+      "signer_file": "b_signer.der",
+      "root_sha256": "eb15769f022e0190262e3ae4cd30fe745e6e4a8492068c2d20bff1cd7b79e52e",
+      "ca_sha256": "d9cd9fb2cdd5fa055b2dc68f17dcadfdc20d4829522d0c89a4bcae5ec4f55fb0",
+      "signer_sha256": "9a3bf92ad6d7efa256632d6f421bde650a41c5fde16dec64fa9b2b7409c9fd21",
+      "intermediates": []
+    },
+    "c1": {
+      "root_file": "c1_root.der",
+      "ca_file": "c1_ca.der",
+      "signer_file": "c1_signer.der",
+      "root_sha256": "f08126dadf6df84bcd12c4758ae0cc2e69ea1d7cb83681da0b65ec52c356f022",
+      "ca_sha256": "22951b909c48871de49bb2ba247a3b976fca94c1e841ef156d57f89301fce067",
+      "signer_sha256": "8fac9951dbdef6a6207303e9e007c7886b110c15a3e9fac4d6b4e39e3334e94b",
+      "intermediates": [
+        "c1_int0.der"
+      ]
+    },
+    "c2": {
+      "root_file": "c2_root.der",
+      "ca_file": "c2_ca.der",
+      "signer_file": "c2_signer.der",
+      "root_sha256": "425510baa91314ef7026ee538d2ecd826f5c87994f8f3d9adbb0929ddafaa163",
+      "ca_sha256": "d51608250435e39935c8c66116d9aaed1a36e3580385e57011ffa113fbec7006",
+      "signer_sha256": "2dc7cd86ebd1e2a896a50674b270c10eb38f1fd6e22c86a91d23badd731eaa00",
+      "intermediates": [
+        "c2_int0.der",
+        "c2_int1.der"
+      ]
+    },
+    "c3": {
+      "root_file": "c3_root.der",
+      "ca_file": "c3_ca.der",
+      "signer_file": "c3_signer.der",
+      "root_sha256": "78fc7e37fb8ddeeba1c55ec5ace85559f44236898eb2dc6fb5c382eaccd9503a",
+      "ca_sha256": "07d7a6be1e0ad331825ce0f788678c281bc52fc15e64eddff9ddb903d77bbf35",
+      "signer_sha256": "b9dafa80217025b195c95ec022f71609b7fcc9138d1d895b2480a3358d46f004",
+      "intermediates": [
+        "c3_int0.der",
+        "c3_int1.der",
+        "c3_int2.der"
+      ]
+    },
+    "pl": {
+      "root_file": "pl_root.der",
+      "ca_file": "pl_ca.der",
+      "signer_file": "pl_signer.der",
+      "root_sha256": "976ca2cca35b4ab24b71eeaf459098e67f47bc01a047fcf266ce3ce31e2fcc57",
+      "ca_sha256": "0a5ea975283154456b51fcf7c0c0346f6e178995b85bdd8f835bc3ce8d3dd122",
+      "signer_sha256": "19288f6fe012c2938678682a0529922388b67ec78b5fbfc7f7c022e7cb7855ce",
+      "intermediates": [
+        "pl_int0.der"
+      ]
+    },
+    "calate": {
+      "root_file": "calate_root.der",
+      "ca_file": "calate_ca.der",
+      "signer_file": "calate_signer.der",
+      "root_sha256": "5ade3a475c78127df02e9d3fe2e4db99d90d7e42af47f43ca933ad44e1b19d49",
+      "ca_sha256": "8f86a8c654438a667a62bf75a8b7b3273acaf1077d3853aa5b37ca95900f21ad",
+      "signer_sha256": "c354b2b47fb3194eebcef7feeb9154e0aebf874e0d32a5321a93f57ea6094157",
+      "intermediates": []
+    },
+    "rootexp": {
+      "root_file": "rootexp_root.der",
+      "ca_file": "rootexp_ca.der",
+      "signer_file": "rootexp_signer.der",
+      "root_sha256": "9f169120e1a39f60b9369e6ab1e834f38104c1a052914d225957afa5ddb65cd5",
+      "ca_sha256": "2ec40b10fa9ade7ecdd60fbf5f23f92e7b88042b74ca3214d5bf74beb628a7eb",
+      "signer_sha256": "b4ef22f0859aac0c35eb45de85d5580d1b290ee446c4b726739bb373e6ba033c",
+      "intermediates": []
+    },
+    "canca": {
+      "root_file": "canca_root.der",
+      "ca_file": "canca_ca.der",
+      "signer_file": "canca_signer.der",
+      "root_sha256": "1f7a4c7e410595c8039d62df43973323236036a4dfe72d6adf978ab4b2bf6037",
+      "ca_sha256": "a7c9a8f85ccf95e3517e502f93cbfb68cbe87d8bbb9335c1be469cf8791bfa44",
+      "signer_sha256": "71e5455dcbcd0a3d31d26adf36290904a618b36d12d18bdec13c84b3d17c9878",
+      "intermediates": []
+    },
+    "canoku": {
+      "root_file": "canoku_root.der",
+      "ca_file": "canoku_ca.der",
+      "signer_file": "canoku_signer.der",
+      "root_sha256": "b6bcb3c0f27422bb32e07da82eceeb50bd6347cc7a3bb522e37b1d6cdc5dbe1b",
+      "ca_sha256": "e77b65f7ce2a19e80d880c038091ccdad399e90dcb8b2f1ca600caf0416d8baf",
+      "signer_sha256": "969db517b887d9fb48ff1ab1496a1d663418894f885e7a8d61797e45352f10de",
+      "intermediates": []
+    },
+    "canobc": {
+      "root_file": "canobc_root.der",
+      "ca_file": "canobc_ca.der",
+      "signer_file": "canobc_signer.der",
+      "root_sha256": "838f48e1c505da27dcd88baae9b5b76b950cafe34eb4f879f9623081c4a29969",
+      "ca_sha256": "5aa4f10bb4b79e725809f9d915428dc9c3e972ca7fe65625c4cbf3c0454af26e",
+      "signer_sha256": "e06a1e718065d8835046fd7ce8abe13327ac58da7ad97e01f4254fd8e8baf999",
+      "intermediates": []
+    },
+    "intexp": {
+      "root_file": "intexp_root.der",
+      "ca_file": "intexp_ca.der",
+      "signer_file": "intexp_signer.der",
+      "root_sha256": "7ee74f24bdcedb9840bfbfadf21913631b2d997df621ff62f9b4ec273c8b01f4",
+      "ca_sha256": "b6bb129d950375a789b81b59ebdf5fbb80bf3812d76adaf03a8fc9ab6f8e19ff",
+      "signer_sha256": "2557be2b795438ae202d5ac18be6f627c21923a8b6886d387242b8c943c4b401",
+      "intermediates": [
+        "intexp_int0.der"
+      ]
+    },
+    "intnca": {
+      "root_file": "intnca_root.der",
+      "ca_file": "intnca_ca.der",
+      "signer_file": "intnca_signer.der",
+      "root_sha256": "f0ef42e727b8612fb59dd86fa23457c5334bfc5dcbfd825e577e02841e2f94c2",
+      "ca_sha256": "711cba3ef50f313be335465c542fe0faabce9ba5151af764746ae2400d73498a",
+      "signer_sha256": "14fa117b50c07a1a7883e08abd29cae7e157dbc7359b23abfd45c9daae02c5f8",
+      "intermediates": [
+        "intnca_int0.der"
+      ]
+    },
+    "intnoku": {
+      "root_file": "intnoku_root.der",
+      "ca_file": "intnoku_ca.der",
+      "signer_file": "intnoku_signer.der",
+      "root_sha256": "64f20061df042d484de22e4dfdee86e9951b4b411bd6269ed66c02345b7242b5",
+      "ca_sha256": "e430bcc65543b8b85e276f5aff74cb8173fe63f2bcb67a0905509a0a17838b3b",
+      "signer_sha256": "5f3dbf09c33fb490e24127d5126a297defaa6f11f2634541e38a1cde004a2aa5",
+      "intermediates": [
+        "intnoku_int0.der"
+      ]
+    },
+    "intunk": {
+      "root_file": "intunk_root.der",
+      "ca_file": "intunk_ca.der",
+      "signer_file": "intunk_signer.der",
+      "root_sha256": "271445aafe6de0cf0b213e26d69331bab3197dfdf8c114fd00c2dccd306fb700",
+      "ca_sha256": "fe2f58185abb7e77c711189511333a88dcb8ed6007834ff8e6cb2466fa915b4a",
+      "signer_sha256": "c38653b6c8a37d2d0f69b5033ce15eddf4d061b5c46f83c94f57f94c321ce8d7",
+      "intermediates": [
+        "intunk_int0.der"
+      ]
+    },
+    "caunk": {
+      "root_file": "caunk_root.der",
+      "ca_file": "caunk_ca.der",
+      "signer_file": "caunk_signer.der",
+      "root_sha256": "f55b1da3b0d1508f24fade11c160caf345a02e4c00b5b59caae768f0d5e4f066",
+      "ca_sha256": "23b70668104091166a11397f7be7f9709a9f6cbee43a002b759137a33b79d38e",
+      "signer_sha256": "6e19d3986b5200de76632e2eb72e4cf34b8c68c52dbdf9371656c1833c99b0d8",
+      "intermediates": []
+    },
+    "rootunk": {
+      "root_file": "rootunk_root.der",
+      "ca_file": "rootunk_ca.der",
+      "signer_file": "rootunk_signer.der",
+      "root_sha256": "10bf81684c3c5efafb6d685b8952fa20fe4413c76c9a9b6538246d9af9551c0c",
+      "ca_sha256": "93411ce7c2c4e0edb8ddeb9b1c556758461bbf7f94e3182498cef5bfb9743823",
+      "signer_sha256": "dc186f78165473539573ee041767578ad0b5a6acedcb55cb214b318f85b724cd",
+      "intermediates": []
+    },
+    "rootnca": {
+      "root_file": "rootnca_root.der",
+      "ca_file": "rootnca_ca.der",
+      "signer_file": "rootnca_signer.der",
+      "root_sha256": "7d3a7421cebe89ea4634be85000c6588890ba2600761c2aa193e2f1d9dc13d87",
+      "ca_sha256": "a81f6a27f834f668b09163d6aade54451ac3c9578ff72aae900258d52c050a5a",
+      "signer_sha256": "7afd9ee4a8bdbd94f24fd3ffdef1890f22b5e64c736c536b3cf1112c33ab1d81",
+      "intermediates": []
+    },
+    "rootnoku": {
+      "root_file": "rootnoku_root.der",
+      "ca_file": "rootnoku_ca.der",
+      "signer_file": "rootnoku_signer.der",
+      "root_sha256": "4a943965337bef6ed338840de7f72fcd01129942ab61146f3a6e47c532e10eb9",
+      "ca_sha256": "8267a5adfc4b74a89d2e72e6e49ec4f22b327b45eee477a8f4f14d3be9c66029",
+      "signer_sha256": "b4975d00c02a0eabff2eb7177fa96793f5baee1e67680ed292aaa0c81872c4a0",
+      "intermediates": []
+    },
+    "a_expired": {
+      "root_file": "a_expired_root.der",
+      "ca_file": "a_expired_ca.der",
+      "signer_file": "a_expired_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "333229127b1f3b819ee3ce3b8fba4dc14b70ed23e9c0be032b69838594c3b3dc",
+      "intermediates": []
+    },
+    "a_eku_noncritical": {
+      "root_file": "a_eku_noncritical_root.der",
+      "ca_file": "a_eku_noncritical_ca.der",
+      "signer_file": "a_eku_noncritical_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "0b17b58e35c9c70e5b6f5c60780dc6722dab008d5c12da9fdba823152a885926",
+      "intermediates": []
+    },
+    "a_eku_extra": {
+      "root_file": "a_eku_extra_root.der",
+      "ca_file": "a_eku_extra_ca.der",
+      "signer_file": "a_eku_extra_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "47c8507e66d33217ce3a558c8b4fb91d85e5f5017f3f6d9d6d67b1d9946a996d",
+      "intermediates": []
+    },
+    "a_eku_missing": {
+      "root_file": "a_eku_missing_root.der",
+      "ca_file": "a_eku_missing_ca.der",
+      "signer_file": "a_eku_missing_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "cbd7614ec1740ffee10d33e6f17dc44f3cccc660810d31425f475fdfbdb90550",
+      "intermediates": []
+    },
+    "a_signer_is_ca": {
+      "root_file": "a_signer_is_ca_root.der",
+      "ca_file": "a_signer_is_ca_ca.der",
+      "signer_file": "a_signer_is_ca_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "45bc911649138b7e5b073d9e9bb3469facb1557425733ab3aec4fedb86d02cb4",
+      "intermediates": []
+    },
+    "a_unknown_critical": {
+      "root_file": "a_unknown_critical_root.der",
+      "ca_file": "a_unknown_critical_ca.der",
+      "signer_file": "a_unknown_critical_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "3d7e7306c607b0d1970ae7c734ebfc999cb0c7873b8a8344bccfece917fed3ab",
+      "intermediates": []
+    },
+    "a_ku_no_signing": {
+      "root_file": "a_ku_no_signing_root.der",
+      "ca_file": "a_ku_no_signing_ca.der",
+      "signer_file": "a_ku_no_signing_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "6e776fafe74cb6afd5353fd86dbf677e06c1109a5dbcb16030ea3bb27110ef44",
+      "intermediates": []
+    },
+    "a_ec_signer": {
+      "root_file": "a_ec_signer_root.der",
+      "ca_file": "a_ec_signer_ca.der",
+      "signer_file": "a_ec_signer_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36",
+      "signer_sha256": "b55e52e912e1c264e4d11887f39ab3e71356be02a907223eb744ae28010574ba",
+      "intermediates": []
+    },
+    "ecca": {
+      "root_file": "ecca_root.der",
+      "ca_file": "ecca_ca.der",
+      "signer_file": "ecca_signer.der",
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4",
+      "ca_sha256": "dc6c7098e2eab3486642a5271fcc90f3f7b74754c92c6381aa76536ec547ca60",
+      "signer_sha256": "938777f276a0d845ec5eef3f75b164450d642915da712dd03415c1a700bd78f2",
+      "intermediates": []
+    }
+  }
+}

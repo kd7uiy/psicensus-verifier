@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "precog-verifier"
+version = "0.1.0"
+description = "Reference verifier for the precog data release format (spec v1)"
+requires-python = ">=3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{name = "Psi Census"}]
+dependencies = []
+
+[project.urls]
+Homepage = "https://psicensus.com"
+Source = "https://github.com/kd7uiy/psicensus-verifier"
+Issues = "https://github.com/kd7uiy/psicensus-verifier/issues"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+precog_verifier = ["trust/*.der"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

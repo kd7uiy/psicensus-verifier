@@ -1,0 +1,25 @@
+{
+  "format": "precog-release/v1",
+  "release_id": "test-sample",
+  "registration_ms": 1700000000000,
+  "beacon": {
+    "network": "mock-beacon",
+    "chain_hash": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+    "genesis": 1692803367,
+    "period": 3,
+    "margin_rounds": 2
+  },
+  "authorities": [
+    {
+      "id": "tsa-a",
+      "kind": "mock-hmac",
+      "name": "Mock authority A"
+    },
+    {
+      "id": "tsa-b",
+      "kind": "mock-hmac",
+      "name": "Mock authority B"
+    }
+  ],
+  "with_participants": false
+}

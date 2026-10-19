@@ -1,0 +1,106 @@
+{
+ "format": "precog-permutation-vectors/v1",
+ "generated_by": "tools/gen_permutation_vectors.py (standard library only)",
+ "tag": "precog/permutation/v1",
+ "status": "amendment 12, approved by Ben 2026-10-11",
+ "rule": "seed = sha256(TAG || randomness || u64(n)); words from sha256(seed || u64(j)) as four big-endian u64; Sattolo with uniform() by rejection",
+ "cases": [
+  {
+   "name": "seed_and_permutation_n2",
+   "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+   "n": 2,
+   "seed": "54eedb2d6a9059e3bcddb5383e6841911e21a99462316a08842f01f3a34f8e00",
+   "permutation": [
+    1,
+    0
+   ]
+  },
+  {
+   "name": "seed_and_permutation_n3",
+   "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+   "n": 3,
+   "seed": "46fc5c6a30d6a7894807b7370a7ac4d9dc50f7c7934bbf7f057e6c9fa12e021f",
+   "permutation": [
+    2,
+    0,
+    1
+   ]
+  },
+  {
+   "name": "seed_and_permutation_n5",
+   "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+   "n": 5,
+   "seed": "c621dd50a2bcf3004b9f830fd522934e8fdf925e165114104242acf476c37068",
+   "permutation": [
+    3,
+    4,
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "name": "seed_and_permutation_n10",
+   "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+   "n": 10,
+   "seed": "0b4303129402d626c654470788df2d2ad4e5ccf4cf43a0f3277c1f3e3fabc486",
+   "permutation": [
+    8,
+    2,
+    6,
+    5,
+    3,
+    7,
+    4,
+    0,
+    9,
+    1
+   ]
+  },
+  {
+   "name": "seed_and_permutation_n1000",
+   "randomness": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+   "n": 1000,
+   "seed": "3f406b10e2d2fb3f56fe28e5e56fad178b489cdfdf0c5be1429ef5b2300cc54b",
+   "permutation_head": [
+    578,
+    610,
+    163,
+    85,
+    557,
+    529,
+    666,
+    374,
+    649,
+    182
+   ],
+   "permutation_u32_be_sha256": "0f82f7933106c8ef81120d6219f1abaaef71906ab5c4cc53aedf569b695fe078"
+  }
+ ],
+ "stream": {
+  "name": "stream_words",
+  "seed": "4f9c43125e2be9bedf8b8f89f7053e9e14e82b4ba859900eb059048b7158fdf9",
+  "block0": "5a163a68562a7f8df786e389f17060ab404955a50aadeb10325615a808c0d397",
+  "block1": "08534c429f221e6cce1615d66b35c996ec56f1c0f3d901c9ea7a235b9b08ba93",
+  "words": [
+   "6491440132697784205",
+   "17836193555848126635",
+   "4632327859064400656",
+   "3627110361339057047",
+   "599907024391773804",
+   "14850080831966661014",
+   "17030064851975209417",
+   "16895855828383873683",
+   "3955306177238237126"
+  ]
+ },
+ "uniform_rejection": {
+  "name": "uniform_rejection",
+  "seed": "83b45b0c084ace0bb908acdb8eb0768c06d66e5f8caa0e8512671d7c0e684f5c",
+  "m": "9223372036854775809",
+  "limit": "9223372036854775809",
+  "words_consumed": 3,
+  "first_word": "15144413119062813972",
+  "result": "9147563678476500712"
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "format": "precog-ots-vectors/v1",
+ "source": "real calendar replies and Bitcoin block headers captured 2026-10-10 to 2026-10-12; each proof assembled exactly as the Worker assembles it",
+ "digests": {
+  "1": "1401c1e42533d6e226010ef0466d45381bdad70656aea92cff45581ca959b388",
+  "2": "9a97f227d0f45da6f8774a8bd2a1bdea48b0ae7f38ce60977fd3113d4455ea9c"
+ },
+ "headers": {
+  "970786": {
+   "header": "00e0143e23f97f4b597f42200e562bb1f04ce597252386300125010000000000000000002667a45612750e6a234f25c75ba301b6d73706e4966586a9be0bb24a60c8c077e05aca6af01e02178b0152f1",
+   "merkle_root": "2667a45612750e6a234f25c75ba301b6d73706e4966586a9be0bb24a60c8c077",
+   "time": 1791646432,
+   "bits": 386014960
+  },
+  "970791": {
+   "header": "004008205bf91c7387a62b925b9fcdb460de32b9c323a3a03995000000000000000000004df2dd36b06b384800b4051dd3b3fc261a906c83bd0b1900a396c14fdf09310d1164ca6af01e0217fa10253f",
+   "merkle_root": "4df2dd36b06b384800b4051dd3b3fc261a906c83bd0b1900a396c14fdf09310d",
+   "time": 1791648785,
+   "bits": 386014960
+  },
+  "970801": {
+   "header": "00e0012034dd614bc7a2caa7b77495ac1b64d1c4c1ca5b9cf40601000000000000000000837041471c1c1da17f229bd83392e35c661f36a55d53fbd865714bbe6b12aac63f7cca6af01e02178c75ffdc",
+   "merkle_root": "837041471c1c1da17f229bd83392e35c661f36a55d53fbd865714bbe6b12aac6",
+   "time": 1791654975,
+   "bits": 386014960
+  }
+ },
+ "cases": [
+  {
+   "file": "digest1_both.ots",
+   "note": "both calendars Bitcoin-attested for digest 1",
+   "digest": "1401c1e42533d6e226010ef0466d45381bdad70656aea92cff45581ca959b388",
+   "sha256": "3fcdc03a44c8f922da8492298a868073eeeb28a6f3cc7bd16f46659576d0f378",
+   "complete": true,
+   "attestations": [
+    {
+     "kind": "bitcoin",
+     "height": 970786,
+     "merkle_root": "2667a45612750e6a234f25c75ba301b6d73706e4966586a9be0bb24a60c8c077"
+    },
+    {
+     "kind": "bitcoin",
+     "height": 970801,
+     "merkle_root": "837041471c1c1da17f229bd83392e35c661f36a55d53fbd865714bbe6b12aac6"
+    }
+   ]
+  },
+  {
+   "file": "digest2_both.ots",
+   "note": "both calendars Bitcoin-attested for digest 2",
+   "digest": "9a97f227d0f45da6f8774a8bd2a1bdea48b0ae7f38ce60977fd3113d4455ea9c",
+   "sha256": "db7348dc6c5fbeadbb26b8e85d43547a807415b27500a9de95d5ccb1a3057726",
+   "complete": true,
+   "attestations": [
+    {
+     "kind": "bitcoin",
+     "height": 970791,
+     "merkle_root": "4df2dd36b06b384800b4051dd3b3fc261a906c83bd0b1900a396c14fdf09310d"
+    },
+    {
+     "kind": "bitcoin",
+     "height": 970801,
+     "merkle_root": "837041471c1c1da17f229bd83392e35c661f36a55d53fbd865714bbe6b12aac6"
+    }
+   ]
+  },
+  {
+   "file": "digest1_alice.ots",
+   "note": "alice only, digest 1 (block 970786)",
+   "digest": "1401c1e42533d6e226010ef0466d45381bdad70656aea92cff45581ca959b388",
+   "sha256": "827c0db609bbfe70243a7e59a4e7e224fd1b3fde06a0e433f054112eef14d715",
+   "complete": true,
+   "attestations": [
+    {
+     "kind": "bitcoin",
+     "height": 970786,
+     "merkle_root": "2667a45612750e6a234f25c75ba301b6d73706e4966586a9be0bb24a60c8c077"
+    }
+   ]
+  },
+  {
+   "file": "digest1_finney.ots",
+   "note": "finney only, digest 1 (block 970801)",
+   "digest": "1401c1e42533d6e226010ef0466d45381bdad70656aea92cff45581ca959b388",
+   "sha256": "c31fd22dad8c0195d8404eae4f210ee1817efa79d9bad8cde1fb299a3ee11393",
+   "complete": true,
+   "attestations": [
+    {
+     "kind": "bitcoin",
+     "height": 970801,
+     "merkle_root": "837041471c1c1da17f229bd83392e35c661f36a55d53fbd865714bbe6b12aac6"
+    }
+   ]
+  },
+  {
+   "file": "digest1_pending.ots",
+   "note": "both calendars still pending, digest 1",
+   "digest": "1401c1e42533d6e226010ef0466d45381bdad70656aea92cff45581ca959b388",
+   "sha256": "04973b8e3d91c57f4c09e5a5a90234332d7ffdb03f58ed9c0faa20d21f39d145",
+   "complete": false,
+   "attestations": [
+    {
+     "kind": "pending"
+    },
+    {
+     "kind": "pending"
+    }
+   ]
+  },
+  {
+   "file": "digest1_wrong_root.ots",
+   "note": "the upgrade of digest 2 spliced under the commitment of digest 1: accepted by the Worker, but the root it computes is in no block",
+   "digest": "1401c1e42533d6e226010ef0466d45381bdad70656aea92cff45581ca959b388",
+   "sha256": "87a63372964e0d0d18825f41b4736470d40d4090356ef97fc84aa72933cccab9",
+   "complete": true,
+   "attestations": [
+    {
+     "kind": "bitcoin",
+     "height": 970791,
+     "merkle_root": "e8dde94ae6fb0365d88837907c8a2a2311846c18f6e435eb5abc9818bc77e7cb"
+    }
+   ]
+  }
+ ]
+}

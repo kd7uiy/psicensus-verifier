@@ -1,0 +1,122 @@
+{
+ "source": "api.drand.sh, captured once; every signature verified with @noble/curves when written",
+ "chain_hash": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+ "public_key": "83cf0f2896adee7eb8b5f01fcad3912212c437e0073e911fb90022d3e760183c8c4b450b6a0a6c3ac6a5776a2d1064510d1fec758c921cc22b0e17e63aaf4bcb5ed66304de9cf809bd274ca73bab4af5a6e9c76a4bc09e76eae8991ef5ece45a",
+ "rounds": [
+  {
+   "round": 1,
+   "signature": "b55e7cb2d5c613ee0b2e28d6750aabbb78c39dcc96bd9d38c2c2e12198df95571de8e8e402a0cc48871c7089a2b3af4b",
+   "randomness": "1466a6cd24e327188770752f6134001c64d6efcc590ccc26b721611ad96f165a"
+  },
+  {
+   "round": 2,
+   "signature": "b6b6a585449b66eb12e875b64fcbab3799861a00e4dbf092d99e969a5eac57dd3f798acf61e705fe4f093db926626807",
+   "randomness": "5782d6987841c654515a0e72b2d1ebb4e741234042c37cb19608ae50d93fb60c"
+  },
+  {
+   "round": 3,
+   "signature": "b3fab6df720b68cc47175f2c777e86d84187caab5770906f515ff1099cb01e4deaa027075d860823e49477b93c72bd64",
+   "randomness": "7ef4621ace1c6da4eb2eee7cd901f81385bca5b189771ec0f08d0d2566dd1a21"
+  },
+  {
+   "round": 4,
+   "signature": "821b77bbd693bf82989524477a37bc245dc4643086f48f09e5e008b4ccf2eba720798a1585855f70aa3ee63e5bed5ed5",
+   "randomness": "93519af44f33975a7da43c67d094952ce259c5a0f3c4f4ca86f68bac8da98f88"
+  },
+  {
+   "round": 5,
+   "signature": "830c14582e34336e45a188cc7acd19661a4d97c455b502f431c959d26c006080d456d890b80d1d7c151dd149726c764a",
+   "randomness": "454499da27a1cf7b49a30850b8caad7d92008d6e06313359922594bdaafa750c"
+  },
+  {
+   "round": 10,
+   "signature": "ac415e508c484053efed1c6c330e3ae0bf20185b66ed088864dac1ff7d6f927610824986390d3239dac4dd73e6f865f5",
+   "randomness": "850f2d84fec6935508464a33f5389b3103087bc44599d782b83cbe2eaa8451e3"
+  },
+  {
+   "round": 100,
+   "signature": "a4a4ff2320c23471a4bf9540ee5fc68e4c6a750dc89fd8bbeb9ba56e0708673b2d285461388f14537332492726efd282",
+   "randomness": "79fe5b8fa2e43dd58852099a422e4653e470910b8e65e592caf23fcfd8d0642c"
+  },
+  {
+   "round": 1000,
+   "signature": "b44679b9a59af2ec876b1a6b1ad52ea9b1615fc3982b19576350f93447cb1125e342b73a8dd2bacbe47e4b6b63ed5e39",
+   "randomness": "fe290beca10872ef2fb164d2aa4442de4566183ec51c56ff3cd603d930e54fdd"
+  },
+  {
+   "round": 12345,
+   "signature": "b199fee19371c391fb972964f679adc5d605d94f7597138d4b2e257f9d47272a2d0abe8457fdc5f4fe0185a3c8fa42ba",
+   "randomness": "62646494ba53614aa97cf7790c82b0c18123b15ec03138df1bc5baabf498895a"
+  },
+  {
+   "round": 99999,
+   "signature": "a3149629c251cd82c23c80501c11e919e55b5dac0af21d1a9f481266a99e79aec96ec7481e1f6f1549861a9eb2bc7daf",
+   "randomness": "9be9a909f05ab8416a76bb991f56f0165dcd980a1d948b5375ce5f3636d82a08"
+  },
+  {
+   "round": 1000000,
+   "signature": "83ad29e4c409f9470fc2ef02f90214df49e02b441a1a241a82d622d9f608ef98fd8b11a029f1bee9d9e83b45088abe72",
+   "randomness": "b22aad4794f7451896f7a371aa46106fd84d919f3f569acd5b2fddf1d1440af3"
+  },
+  {
+   "round": 5000000,
+   "signature": "a597f735255263bf239b481d8065e0ef91eed416290da51e3ee6f128a9be29b4429525552c32fbbdb0dee406743a863b",
+   "randomness": "4c6c26dc9b7f65728845b67eb8d3c4a5f0f6c5f582de936df22bea654e68d4a9"
+  },
+  {
+   "round": 10000000,
+   "signature": "a187c9f5800521e986b5658924696682071ce7ae965486e8fd08bc2c4758bdbb9ed9ecb7beee392a38214e321ecd434f",
+   "randomness": "5e6508f1a1f689accfc8b027dec7eb999b20b4f66582b2621231cabf9601bf57"
+  },
+  {
+   "round": 20000000,
+   "signature": "96892582a33552a7b67ba44ef09c3ccd535bbebe760c93ecf45be8958d0c0f06390c6d19d7bf492eb806af7eef6b125c",
+   "randomness": "f39c98df5525968e6622e0c63edb3d1f9c5607cf780db78abdded36e4b3dba95"
+  },
+  {
+   "round": 25000000,
+   "signature": "97c3190c5a1c7c0d4d2949f5818516df10ee171b7940feac5ea1270fa85a0339398322c13caede8e378fe4171288af85",
+   "randomness": "8c9a5655665c1f98d6653b1b6ace3c2d29cad313158b4b61476203171b16bab0"
+  },
+  {
+   "round": 28000000,
+   "signature": "91742369e163b72378c39181d02d121198ad1de907e394d55552bb74b2cdadc727b2483599bbc6fa4c8fdb05e1751e8c",
+   "randomness": "f53dbbd81aa02d94e5a7c93d86417861b64deee55d3eac14172cb6275ea4415a"
+  },
+  {
+   "round": 30000000,
+   "signature": "81d2fc112b91932d9e4074a46b88c4dc78149b859660e0673c0bb9bd0caefdc9cc194e83de980441355b8ef44cc7a355",
+   "randomness": "24fdbb00b10a967c392b5b708967011e996689994a2bf1c5573c3e372c2e844d"
+  },
+  {
+   "round": 31000000,
+   "signature": "a43f1eab1da28f3f95220709d12a61cc0f1fed4a9ffe7cb4948e3bc3777de670e837501cdc70c903a6189c0639871985",
+   "randomness": "b83329945edcd19e76cdc0f8c44afcac406df603247ef357b93924673da8f9a5"
+  },
+  {
+   "round": 32000000,
+   "signature": "b1c90cc3c290ae966b9b5230cd3c93389bd95ae0274f7dce8ef43979745fa747c72fbebe7ddafb79088120565d91b91f",
+   "randomness": "ea1bdeb86e62a543551740bf792d78a296861de06a8bbd64b2b0e2134f40b166"
+  },
+  {
+   "round": 32500000,
+   "signature": "87e35e143414eb907dfde7ecc26227aea7af81dba104a232782ad04c870a65810e7c94cb0d7a4d2a4bcc06dcb0ca98c4",
+   "randomness": "57472a6e93b2a9c4233ec7dc2e7922c11a12227dcac3363ec8eed4ad9efad793"
+  },
+  {
+   "round": 32700000,
+   "signature": "afaef99ecc0a56993fc66f032403971368456f07f3d727bdcd365af742331a2c57ffad1c5ad3052166b4beaa7ea7727c",
+   "randomness": "171ec62cf5d8cc4cf8ab5d10f3e1921bc359a3f1be480c03227576173557f500"
+  },
+  {
+   "round": 32780000,
+   "signature": "a9bb6d7f79985f959ff477027fed4e3df9ccbdde9c1ff38d0de17d6589ef0d38b3f64ca7c8d38b75e8bc6cab34c948c5",
+   "randomness": "5107f2efe34cc19dd2283e6c683a52f47203f9666f198f6f807a0ae540f63d8a"
+  },
+  {
+   "round": 32788054,
+   "signature": "b0bba24280d0fec1707234f5e4a3e0277918eb4e668e25bb1e32bcfb3958bfc9ad68b6f1243eadaeb9cd7292ce5fd00d",
+   "randomness": "14de8dbaf1bd33bf83fd2989ba60fc8bfa232a3aef2c35c0ac06b895e67f6dee"
+  }
+ ]
+}

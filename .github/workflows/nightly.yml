@@ -1,0 +1,53 @@
+name: nightly
+
+# Once a day: download the live export from https://psicensus.com with this repository's own downloader and verify it
+# with this repository's own verifier, under the production rules (a mock authority or a mock beacon is an error).
+# A failed run means the published record did not verify. The verifier's output is kept as an artifact.
+#
+# Politeness: the downloader sends at most 5 requests per second (about 10 requests for a whole download today) and
+# nothing else is asked of the site. Run it once a day and do not shorten the interval.
+
+on:
+  schedule:
+    - cron: "43 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - name: Install
+        run: pip install -e .
+      - name: Download the export
+        shell: bash
+        run: |
+          mkdir -p out
+          python -m precog_verifier fetch https://psicensus.com release 2>&1 | tee out/fetch.txt
+      - name: Verify the export
+        shell: bash
+        run: |
+          python -m precog_verifier verify-release release --require-production 2>&1 | tee out/verify.txt
+      - name: Keep the output
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: nightly-verify-output
+          path: |
+            out/fetch.txt
+            out/verify.txt
+          if-no-files-found: warn
+          retention-days: 30

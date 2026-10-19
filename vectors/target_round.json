@@ -1,0 +1,137 @@
+{
+  "spec": "v1",
+  "description": "target_round per SPEC section 7 (integer arithmetic only) and round_time",
+  "cases": [
+    {
+      "name": "exact-boundary",
+      "note": "threshold equals round_time(1001) exactly, so the target is round 1001",
+      "input": {
+        "gen_time_ms": [
+          1692806361000
+        ],
+        "genesis": 1692803367,
+        "period": 3,
+        "margin_rounds": 2
+      },
+      "output": {
+        "t_anchor": 1692806361,
+        "threshold": 1692806367,
+        "target_round": 1001
+      }
+    },
+    {
+      "name": "ceil-of-ms",
+      "note": "one ms past a whole second rounds t_anchor up, pushing the target to round 1002",
+      "input": {
+        "gen_time_ms": [
+          1692806361001
+        ],
+        "genesis": 1692803367,
+        "period": 3,
+        "margin_rounds": 2
+      },
+      "output": {
+        "t_anchor": 1692806362,
+        "threshold": 1692806368,
+        "target_round": 1002
+      }
+    },
+    {
+      "name": "max-of-two-tokens",
+      "note": "the later token decides; 370.5 s rounds up to 371",
+      "input": {
+        "gen_time_ms": [
+          1692806361000,
+          1692806370500
+        ],
+        "genesis": 1692803367,
+        "period": 3,
+        "margin_rounds": 2
+      },
+      "output": {
+        "t_anchor": 1692806371,
+        "threshold": 1692806377,
+        "target_round": 1005
+      }
+    },
+    {
+      "name": "max-of-two-tokens-reversed",
+      "note": "token order does not matter",
+      "input": {
+        "gen_time_ms": [
+          1692806370500,
+          1692806361000
+        ],
+        "genesis": 1692803367,
+        "period": 3,
+        "margin_rounds": 2
+      },
+      "output": {
+        "t_anchor": 1692806371,
+        "threshold": 1692806377,
+        "target_round": 1005
+      }
+    },
+    {
+      "name": "between-rounds",
+      "note": "threshold lands one second after a round_time",
+      "input": {
+        "gen_time_ms": [
+          1692806362000
+        ],
+        "genesis": 1692803367,
+        "period": 3,
+        "margin_rounds": 2
+      },
+      "output": {
+        "t_anchor": 1692806362,
+        "threshold": 1692806368,
+        "target_round": 1002
+      }
+    },
+    {
+      "name": "before-genesis",
+      "note": "clamped to round 1",
+      "input": {
+        "gen_time_ms": [
+          0
+        ],
+        "genesis": 1692803367,
+        "period": 3,
+        "margin_rounds": 2
+      },
+      "output": {
+        "t_anchor": 0,
+        "threshold": 6,
+        "target_round": 1
+      }
+    },
+    {
+      "name": "round_time-1",
+      "input": {
+        "round": 1
+      },
+      "output": {
+        "round_time": 1692803367
+      }
+    },
+    {
+      "name": "round_time-2",
+      "input": {
+        "round": 2
+      },
+      "output": {
+        "round_time": 1692803370
+      }
+    },
+    {
+      "name": "round_time-1001",
+      "input": {
+        "round": 1001
+      },
+      "output": {
+        "round_time": 1692806367
+      }
+    }
+  ]
+}

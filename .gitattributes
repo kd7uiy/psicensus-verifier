@@ -1,0 +1,2 @@
+vectors/*.json text eol=lf
+tests/data/** text eol=lf

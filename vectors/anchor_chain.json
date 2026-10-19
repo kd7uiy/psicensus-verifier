@@ -1,0 +1,47 @@
+{
+  "spec": "v1",
+  "description": "three chained anchors; seq 1 uses 32 zero bytes as prev_anchor_hash",
+  "cases": [
+    {
+      "name": "chain-of-3",
+      "input": {
+        "anchors": [
+          {
+            "anchor_seq": 1,
+            "merkle_root": "b2e40c32ea7e2f2626154a5255aafbfc19a755dd4dcb685e0b461f65457e346c",
+            "leaf_count": 1
+          },
+          {
+            "anchor_seq": 2,
+            "merkle_root": "b7a9320fc0e0e0aad432417d5e235cdd21fe5baa41d8f90cd20acf7d3046fff2",
+            "leaf_count": 3
+          },
+          {
+            "anchor_seq": 3,
+            "merkle_root": "1259e11377889139a6746a4fcaa7b4551f152e1efa912dabb6559f1b76c029d6",
+            "leaf_count": 5
+          }
+        ]
+      },
+      "output": {
+        "anchors": [
+          {
+            "prev_anchor_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "preimage": "707265636f672f616e63686f722f763100000000000000010000000000000000000000000000000000000000000000000000000000000000b2e40c32ea7e2f2626154a5255aafbfc19a755dd4dcb685e0b461f65457e346c0000000000000001",
+            "anchor_hash": "4e6398eb17993f29bc0a2a20e7bebed93c574827ea1785a4d632b256ff6873b9"
+          },
+          {
+            "prev_anchor_hash": "4e6398eb17993f29bc0a2a20e7bebed93c574827ea1785a4d632b256ff6873b9",
+            "preimage": "707265636f672f616e63686f722f763100000000000000024e6398eb17993f29bc0a2a20e7bebed93c574827ea1785a4d632b256ff6873b9b7a9320fc0e0e0aad432417d5e235cdd21fe5baa41d8f90cd20acf7d3046fff20000000000000003",
+            "anchor_hash": "5d4c4c8b3dcad3c5ec8f36e2e73952d9bf621346a4c5d15ff45a48ea2787f5b6"
+          },
+          {
+            "prev_anchor_hash": "5d4c4c8b3dcad3c5ec8f36e2e73952d9bf621346a4c5d15ff45a48ea2787f5b6",
+            "preimage": "707265636f672f616e63686f722f763100000000000000035d4c4c8b3dcad3c5ec8f36e2e73952d9bf621346a4c5d15ff45a48ea2787f5b61259e11377889139a6746a4fcaa7b4551f152e1efa912dabb6559f1b76c029d60000000000000005",
+            "anchor_hash": "68fc61d66bed174ccc7f6f7c34e9a88636fcd5a8b0a0b1165dc503e9a6927ba3"
+          }
+        ]
+      }
+    }
+  ]
+}

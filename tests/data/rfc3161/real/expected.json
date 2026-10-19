@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "name": "digicert",
+      "file": "real/digicert.tsr",
+      "digest": "6e0b8d789f4d6e85a25e7df1c4a0732c6b13834e36b7a0c8b16b0d81a258f9db",
+      "entry": {
+        "issuing_ca_sha256": [
+          "ca0b1554ecd901ea19dcad8749e9f2648c8d6dfcea1add9d2c2109415bb82ccd"
+        ],
+        "root_sha256": "552f7bdcf1a7af9e6ce672017f4f12abf77240c78e761ac203d1d9d20ac89988"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1791122013000
+      }
+    },
+    {
+      "name": "globalsign",
+      "file": "real/globalsign.tsr",
+      "digest": "6e0b8d789f4d6e85a25e7df1c4a0732c6b13834e36b7a0c8b16b0d81a258f9db",
+      "entry": {
+        "issuing_ca_sha256": [
+          "52373a21b95b5e6de12a2bcf0ffb7d6a633b4caad725f64f6236fbe989dbc29e"
+        ],
+        "root_sha256": "2bcbbfd66282c680491c8cd7735fdbbab7a8079b127bec60c535976834399af7"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1791122014000
+      }
+    },
+    {
+      "name": "certum",
+      "file": "real/certum.tsr",
+      "digest": "6e0b8d789f4d6e85a25e7df1c4a0732c6b13834e36b7a0c8b16b0d81a258f9db",
+      "entry": {
+        "issuing_ca_sha256": [
+          "f882effc16de28d508c092e35825b00242cf963071c279ef09310d9d95784b35"
+        ],
+        "root_sha256": "b676f2eddae8775cd36cb0f63cd1d4603961f49e6265ba013a2f0307b6d0b804"
+      },
+      "expect": {
+        "ok": true,
+        "gen_time_ms": 1791122015000
+      }
+    }
+  ]
+}

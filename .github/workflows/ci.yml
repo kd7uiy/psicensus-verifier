@@ -1,0 +1,28 @@
+name: ci
+
+# Runs the verifier's own tests and verifies the bundled sample release (no network needed).
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Tests
+        run: pytest -q
+      - name: Verify the bundled sample release
+        run: python -m precog_verifier verify-release tests/data/sample_release --as-of 2023-11-17T00:00:00Z

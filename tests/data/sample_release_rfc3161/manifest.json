@@ -1,0 +1,33 @@
+{
+  "format": "precog-release/v1",
+  "release_id": "test-sample",
+  "registration_ms": 1700000000000,
+  "beacon": {
+    "network": "mock-beacon",
+    "chain_hash": "52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971",
+    "genesis": 1692803367,
+    "period": 3,
+    "margin_rounds": 2
+  },
+  "authorities": [
+    {
+      "id": "tsa-a",
+      "kind": "rfc3161",
+      "name": "Test authority A (synthetic PKI)",
+      "issuing_ca_sha256": [
+        "aef52756b1a3ea5a8cadd80cb21f45cabb8e123d2247b692c3fb8dd5b72ddb36"
+      ],
+      "root_sha256": "c8f00733ed27040b41930beae5f04c3fbfd304e5cb01b3e187b6ea6d9f3a67b4"
+    },
+    {
+      "id": "tsa-b",
+      "kind": "rfc3161",
+      "name": "Test authority B (synthetic PKI)",
+      "issuing_ca_sha256": [
+        "d9cd9fb2cdd5fa055b2dc68f17dcadfdc20d4829522d0c89a4bcae5ec4f55fb0"
+      ],
+      "root_sha256": "eb15769f022e0190262e3ae4cd30fe745e6e4a8492068c2d20bff1cd7b79e52e"
+    }
+  ],
+  "with_participants": false
+}

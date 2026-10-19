@@ -1,0 +1,10 @@
+{
+  "date": "2023-11-15",
+  "anchor_seq": 5,
+  "anchor_hash": "24adc73702a83f4a16ca92e799516ab37d36c60ba66c078afe80f3ffa1449264",
+  "anchors_that_day": 4,
+  "nist_pulse": {
+    "uri": "mock://nist-beacon/2023-11-15",
+    "output_value": "59c0c1b989409f920b3eabcd92b0158642d7bcf5282517e194d51e5a0bc19a2d"
+  }
+}
