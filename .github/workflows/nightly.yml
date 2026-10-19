@@ -2,10 +2,21 @@ name: nightly
 
 # Once a day: download the live export from https://psicensus.com with this repository's own downloader and verify it
 # with this repository's own verifier, under the production rules (a mock authority or a mock beacon is an error).
-# A failed run means the published record did not verify. The verifier's output is kept as an artifact.
+# tools/nightly_verify.py does both (the same two steps as `python -m precog_verifier fetch` then `verify-release
+# --require-production`), judges the export at the moment its download started (--as-of, taken before the first request),
+# and writes a report. A failed run means the published record did not verify, or could not be downloaded.
+# The report is kept as an artifact, and a failed run opens (or comments on) ONE issue titled "Nightly verification failed".
 #
-# Politeness: the downloader sends at most 5 requests per second (about 10 requests for a whole download today) and
-# nothing else is asked of the site. Run it once a day and do not shorten the interval.
+# Caches (a speed-up only, never evidence): btc_headers.jsonl (the Bitcoin block headers the proofs need) and ots-cache/ (the
+# OpenTimestamps proofs already downloaded) are kept between runs with actions/cache. The key ends in the run id and attempt,
+# so every run saves a new entry and the newest earlier one is restored (restore-keys). A miss, a damaged file or a forged line
+# changes nothing: the downloader drops what it cannot use, and the verifier re-checks every header and every proof itself.
+# A cached proof or header is never a reason to accept or to reject anything; an invalid proof is reported only under the
+# verifier's own rule, after the public explorers have been asked (SPEC amendment 15). The proof cache does a full download at
+# least every 7 days.
+#
+# Politeness: the downloader sends at most 5 requests per second (about 10 requests for a whole download today, fewer with the
+# cache) and nothing else is asked of the site. Run it once a day and do not shorten the interval.
 
 on:
   schedule:
@@ -14,6 +25,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: nightly
@@ -32,22 +44,68 @@ jobs:
           python-version: "3.14"
       - name: Install
         run: pip install -e .
-      - name: Download the export
+      - name: Restore the Bitcoin header cache
+        uses: actions/cache/restore@v5
+        with:
+          path: btc-cache/btc_headers.jsonl
+          key: btc-headers-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: btc-headers-
+      - name: Restore the OpenTimestamps proof cache
+        uses: actions/cache/restore@v5
+        with:
+          path: ots-cache
+          key: ots-proofs-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: ots-proofs-
+      - name: Verify
+        id: verify
         shell: bash
         run: |
           mkdir -p out
-          python -m precog_verifier fetch https://psicensus.com release 2>&1 | tee out/fetch.txt
-      - name: Verify the export
-        shell: bash
+          python tools/nightly_verify.py --base-url https://psicensus.com \
+            --btc-headers-cache btc-cache/btc_headers.jsonl --ots-cache ots-cache \
+            --report out/report.json --summary out/summary.md
+      - name: Publish the summary
+        if: always()
         run: |
-          python -m precog_verifier verify-release release --require-production 2>&1 | tee out/verify.txt
+          if [ -f out/summary.md ]; then cat out/summary.md >> "$GITHUB_STEP_SUMMARY"; fi
       - name: Keep the output
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: nightly-verify-output
           path: |
-            out/fetch.txt
-            out/verify.txt
+            out/report.json
+            out/summary.md
           if-no-files-found: warn
           retention-days: 30
+      - name: Keep the Bitcoin header cache
+        if: always() && hashFiles('btc-cache/btc_headers.jsonl') != ''
+        uses: actions/cache/save@v5
+        with:
+          path: btc-cache/btc_headers.jsonl
+          key: btc-headers-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Keep the OpenTimestamps proof cache
+        if: always() && hashFiles('ots-cache/ots_cache.json') != ''
+        uses: actions/cache/save@v5
+        with:
+          path: ots-cache
+          key: ots-proofs-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Raise an alert issue
+        if: failure() && steps.verify.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -eu
+          label=nightly-alert
+          title="Nightly verification failed"
+          gh label create "$label" --force --color B60205 --description "Raised by the nightly verification job"
+          if [ -f out/summary.md ]; then cp out/summary.md out/issue-body.md; else echo "No report was written." > out/issue-body.md; fi
+          printf '\nRun: %s\n' "$RUN_URL" >> out/issue-body.md
+          existing=$(gh issue list --label "$label" --state open --limit 1 --json number --jq '.[0].number // empty')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file out/issue-body.md
+          else
+            gh issue create --title "$title" --label "$label" --body-file out/issue-body.md
+          fi

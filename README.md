@@ -93,7 +93,7 @@ Be sceptical about these. Each one is a place where trust in the operator, or yo
 
 ### Expected production manifest
 
-These are the values in the live manifest, `https://psicensus.com/export/manifest.json`, **as of 2026-10-11**.
+These are the values in the live manifest, `https://psicensus.com/export/manifest.json`, **as of 2026-10-19**.
 Compare them with the `manifest.json` of any release you verify; they are a snapshot, not a promise, and a later
 release may add an issuing CA to a list (the lists are append-only) or an authority. The tool does not compare
 them for you.
@@ -119,14 +119,24 @@ Requirements: Python 3.14 or newer (see `pyproject.toml`). No packages are neede
 `pytest` is needed only to run the tests.
 
 ```
-cd verifier
+git clone https://github.com/kd7uiy/psicensus-verifier
+cd psicensus-verifier
 python -m venv .venv
 .venv/bin/python -m pip install -e .          # Linux and macOS
 .venv\Scripts\python -m pip install -e .      # Windows (cmd or PowerShell)
 ```
 
+On Windows, clone with `git clone -c core.longpaths=true https://github.com/kd7uiy/psicensus-verifier`: some
+file names under `src/precog_verifier/trust/` and `tests/data/` are long (a SHA-256 in hex), and without long-path
+support the checkout is incomplete. The three pinned root certificates (`.der` files) in `src/precog_verifier/trust/`
+must be present; if one is missing, the verifier reports `trust_root: no trusted root`, and the release looks invalid
+when it is the checkout that is broken.
+
+Use the virtual environment's Python for every command below: activate it, or call `.venv/bin/python` (Linux and macOS)
+or `.venv\Scripts\python` (Windows) in place of `python`. Every command in this README is run from the repository root.
+
 Without installing, `PYTHONPATH=src python -m precog_verifier ...` (Linux/macOS) or
-`$env:PYTHONPATH="src"; python -m precog_verifier ...` (PowerShell) also works from the `verifier` directory.
+`$env:PYTHONPATH="src"; python -m precog_verifier ...` (PowerShell) also works from the repository root.
 
 ### Verify a bundled test release (no network)
 
@@ -141,10 +151,15 @@ Its output, in full:
 
 ```
 result OK
+as_of_ms 1791246600000
+registration_ms 0 source=manifest
 release_id test-real-fixtures-2026-10-05
 analysis n_batches=7 N_trials=175 hits=32 rate=0.182857 S=-3 z=-0.566947
 excluded pre_registration=0 duplicate_later=0 duplicate_same_anchor=0
 canary seen=0 n_batches=0 N_trials=0 hits=0 rate=n/a S=0 z=n/a
+secondary unavailable code=secondary.no_participants
+permutation unavailable code=permutation.pending round=32827710
+ots confirmed=0 pending=0 unchecked=0 late=0 missing=0
 errors 0 warnings 0
 ```
 
@@ -155,6 +170,8 @@ The other two fixtures use mock authorities (`sample_release`) and a synthetic t
 python -m precog_verifier verify-release tests/data/sample_release_rfc3161 --offline --as-of 2023-11-17T00:00:00Z --trust-dir tests/data/rfc3161/synth/trust
 ```
 
+This one prints `result OK` and one warning, `manifest.mock_beacon` (the fixture uses the test beacon), and exits 0.
+
 ### Download the real release and verify it
 
 The public site serves the export at `https://psicensus.com/export/*`
@@ -162,8 +179,17 @@ The public site serves the export at `https://psicensus.com/export/*`
 
 ```
 python -m precog_verifier fetch https://psicensus.com ./release
-python -m precog_verifier verify-release ./release --require-production --registration-ms <value published with the pre-registration>
+python -m precog_verifier verify-release ./release --require-production
 ```
+
+`--registration-ms <ms>` is optional: it fails the run with `manifest.registration_mismatch` when the manifest's
+`registration_ms` differs from the value you pass (SPEC amendment 14). No such value exists before the study is
+registered, so run without the flag for now; the value will be published with the registered study.
+
+What to expect today: the study is not registered yet, so the manifest's `registration_ms` is the far-future
+placeholder and every player row counts as pre-registration. The analysis line therefore shows `n_batches=0`, and the
+warnings `canary.unverified count=4` and `ots.late count=1` and the line `permutation unavailable code=permutation.too_few`
+are expected in today's record.
 
 `fetch` needs `https` (plain `http` is accepted only for `localhost`, `127.0.0.1` and `::1`), and the directory must be empty or
 missing. It prints `fetch OK ...` and exits 0, or prints `error <code>` and exits 1 (the export could not be downloaded;
@@ -476,7 +502,7 @@ mismatch between this README and the code, or a way to bias the result without t
 please report it. Give the release you used (`release_id` and the SHA-256 of `manifest.json`), the command,
 and the output.
 
-<!-- contact: Ben to fill -->
+To report a suspected vulnerability privately, use the repository's **Security** tab (GitHub's private vulnerability reporting; see [`SECURITY.md`](SECURITY.md)). For anything else, such as a mismatch between this document and the code, open an issue at https://github.com/kd7uiy/psicensus-verifier/issues.
 
 ## Layout
 
@@ -488,4 +514,4 @@ and the output.
 
 ## Continuous checks
 
-Two GitHub Actions workflows run in this repository. `ci.yml` runs on every push and pull request: it installs the package, runs the test suite and verifies the bundled sample release. `nightly.yml` runs once a day (and on request): it downloads the live export from https://psicensus.com with `python -m precog_verifier fetch`, verifies it with `verify-release --require-production` and keeps the output as a run artifact. A red nightly run means the download or the verification failed; the artifact says which.
+Two GitHub Actions workflows run in this repository. `ci.yml` runs on every push and pull request: it installs the package, runs the test suite and verifies the bundled sample release. `nightly.yml` runs once a day (and on request): it runs `tools/nightly_verify.py`, which downloads the live export from https://psicensus.com with this repository's downloader (the code behind `python -m precog_verifier fetch`), verifies it with `verify-release --require-production` judged at the time the download started, and writes a report that is kept as a run artifact. The Bitcoin block headers and the OpenTimestamps proofs already downloaded are kept between runs in the Actions cache; this only saves requests to the public explorers and the site, and the verifier checks every header and proof itself. A red nightly run means the download or the verification failed; the report says which, and the run opens (or comments on) one issue titled "Nightly verification failed".
