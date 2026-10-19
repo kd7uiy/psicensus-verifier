@@ -418,8 +418,8 @@ All of the numbers come from one release directory and this code; there is no hi
 
 ## 5. The pre-registered analysis
 
-The full text is `docs/study-precognition.md` in this repository (a draft until registration) and is published unchanged on
-OSF when the study is switched on. The verifier implements the primary analysis:
+The full text is added to this repository as `docs/study-precognition.md` when the study is registered, and is
+published unchanged on OSF at the same time. The verifier implements the primary analysis:
 
 - Unit: one sealed batch of 25 guesses. H0: the pooled hit rate is 20%; H1 (two-sided): it differs from 20%.
 - `S = sum over counted batches of (hits - 0.2 * 25)`; `z = S / sqrt(N_trials * 0.2 * 0.8)`. This is valid
