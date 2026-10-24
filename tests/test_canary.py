@@ -1,4 +1,4 @@
-"""Verifiable canary guesses (SPEC amendment 9).
+"""Verifiable canary guesses (SPEC 9.7).
 
 A row with source == "canary" must carry guesses == derive(m) for a whole minute m with
 sealed_at_ms - 600000 <= m <= sealed_at_ms, and test_id "card5". Failing that is an ERROR

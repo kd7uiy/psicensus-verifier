@@ -1,4 +1,4 @@
-"""Bitcoin block headers for the check of the OpenTimestamps proofs (SPEC amendment 15).
+"""Bitcoin block headers for the check of the OpenTimestamps proofs (SPEC 11.4).
 
 A header is *acceptable* when its double-SHA-256 hash, read as a little-endian integer, is at most the target its own
 `bits` field encodes, and that target is at most OTS_MAX_TARGET (a minimum amount of work per header). Where the 80 bytes
@@ -57,7 +57,7 @@ def hash_meets_target(block_hash: bytes, target: int) -> bool:
 
 
 def header_acceptable(header: object, max_target: int = OTS_MAX_TARGET) -> bool:
-    """SPEC amendment 15: 80 bytes whose work meets their own target, and whose own target is not easier than `max_target`."""
+    """SPEC 11.4: 80 bytes whose work meets their own target, and whose own target is not easier than `max_target`."""
     if not isinstance(header, (bytes, bytearray)) or len(header) != HEADER_BYTES:
         return False
     header = bytes(header)

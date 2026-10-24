@@ -1,4 +1,4 @@
-"""Generate tests/data/permutation_v1/vectors.json (SPEC amendment 12, approved 2026-10-11).
+"""Generate tests/data/permutation_v1/vectors.json (SPEC 9.11).
 
 Self-contained on purpose: it uses only the standard library (hashlib) and does not import precog_verifier,
 so the vectors do not depend on the code they check. Run:  python tools/gen_permutation_vectors.py

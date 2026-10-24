@@ -1,4 +1,4 @@
-"""The strict .ots parser (SPEC amendment 15): real proofs of the repository vectors, then one negative test per rule."""
+"""The strict .ots parser (SPEC 11.4): real proofs of the repository vectors, then one negative test per rule."""
 import pytest
 from ots_support import (
     DIGEST1, DIGEST2, MAGIC, TAG_BITCOIN, VECTORS, att_bitcoin, att_pending, file_of, fork, op_append, op_prepend, op_sha256,

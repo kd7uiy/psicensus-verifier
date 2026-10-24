@@ -137,7 +137,7 @@ def test_the_report_of_a_live_run_has_the_head_files_and_no_no_heads_warning(ser
 def test_an_export_with_no_heads_still_warns(serve, tmp_path):
     s = serve(export_route(make_pages([2, 3]), heads_pages=make_heads_pages([])))
     rc, rep, _ = run_cli(tmp_path, "--base-url", s.url, "--work-dir", str(tmp_path / "w"))
-    assert rc == 1 and rep["classification"] == "integrity_alert"  # head.missing (SPEC amendment 10)
+    assert rc == 1 and rep["classification"] == "integrity_alert"  # head.missing (SPEC 10.1)
     assert rep["verifier"]["error_counts"].get("head.missing") == 1 and "release.no_heads" in rep["warnings"]
     assert rep["export"]["heads"] == 0
 

@@ -1,6 +1,6 @@
-"""Generate tests/data/canary_relabel_v1/vectors.json (amendment 17, approved by Ben 2026-10-16).
+"""Generate tests/data/canary_relabel_v1/vectors.json (SPEC 9.8).
 
-Amendment 17, approved by Ben 2026-10-16: a `player` row whose guesses equal the canary guesses (SPEC amendment 9) of a
+SPEC 9.8: a `player` row whose guesses equal the canary guesses (SPEC 9.7) of a
 candidate slot of its own `sealed_at_ms` is a relabelled canary batch. Each case gives the row fields the rule reads
 (`guesses`, `test_id`, `sealed_at_ms`) and the expected result: the lowest matching slot in Unix milliseconds, or null.
 

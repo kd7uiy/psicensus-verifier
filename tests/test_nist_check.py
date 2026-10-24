@@ -1,4 +1,4 @@
-"""The NIST pulse of a daily head (SPEC amendment 16, DRAFT): fetched and compared when online, warnings only.
+"""The NIST pulse of a daily head (SPEC 11.5): fetched and compared when online, warnings only.
 No test opens a network connection: the fetch function is injected, and the real answers of the beacon are the files in
 tests/data/nist_v1."""
 import json

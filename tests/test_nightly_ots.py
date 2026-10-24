@@ -1,4 +1,4 @@
-"""The nightly and the OpenTimestamps check (SPEC amendment 15): warnings of the verifier never turn the nightly into a failure,
+"""The nightly and the OpenTimestamps check (SPEC 11.4): warnings of the verifier never turn the nightly into a failure,
 `ots.invalid` is an ordinary verifier error (an integrity alert), and the new `ots ...` output line is ignored by the parser.
 No network (pending proofs need no Bitcoin header)."""
 import json

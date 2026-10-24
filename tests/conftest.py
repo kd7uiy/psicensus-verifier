@@ -37,7 +37,7 @@ FIXTURE_AS_OF = "2023-11-17T00:00:00Z"  # after every day of the 2023 sample rel
 
 @pytest.fixture(autouse=True)
 def _fixed_nightly_as_of(monkeypatch):
-    """The nightly judges a live run at its own download time; fixtures are old, so tests pin it (SPEC amendment 10)."""
+    """The nightly judges a live run at its own download time; fixtures are old, so tests pin it (SPEC 10.1)."""
     import sys
 
     nv = sys.modules.get("nightly_verify")

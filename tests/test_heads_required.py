@@ -1,4 +1,4 @@
-"""Daily heads are required up to as_of (SPEC 10.1 / 11, amendment 10, approved by Ben 2026-10-10). No network."""
+"""Daily heads are required up to as_of (SPEC 10.1 / 11). No network."""
 import datetime
 
 import pytest

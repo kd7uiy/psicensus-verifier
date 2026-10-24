@@ -1,0 +1,1581 @@
+{
+  "spec": "v1, amendment 18",
+  "description": "The registered analysis rules. rows: counts of the counted batches and the canary set (R1, R2) for a list of batches; stouffer: k, S_first, Z_first and Z (R3), over the counted batches; interval: the 95% null interval in percentage points for hits out of N_trials (R4); looks: look number j and the cut of a YYYY-Qn release for a registration time (R5); anchors: whether an anchor is after the cut (R5); display: how z and the interval are shown (R7). dup is null (first copy alone), later or same_anchor.",
+  "registration_ms": 1801440000000,
+  "rows": [
+    {
+      "name": "r1_other_test_after_registration",
+      "registration_ms": 1801440000000,
+      "batches": [
+        {
+          "name": "card5_after",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000010,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000001",
+          "participant": null
+        },
+        {
+          "name": "other_after",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000020,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000002",
+          "participant": null
+        }
+      ],
+      "expected": {
+        "excluded_pre_registration": 0,
+        "duplicate_later": 0,
+        "duplicate_same_anchor": 0,
+        "excluded_other_test": 1,
+        "n_canary": 0,
+        "n_batches": 1,
+        "N_trials": 25,
+        "hits": 7,
+        "S": 2,
+        "canary_n_batches": 0,
+        "canary_hits": 0,
+        "canary_S": 0
+      }
+    },
+    {
+      "name": "r1_other_test_before_registration_is_pre_registration_only",
+      "registration_ms": 1801440000000,
+      "batches": [
+        {
+          "name": "card5_after",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000010,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000003",
+          "participant": null
+        },
+        {
+          "name": "other_before",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801439999999,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000004",
+          "participant": null
+        },
+        {
+          "name": "card5_before",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801439999999,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000005",
+          "participant": null
+        }
+      ],
+      "expected": {
+        "excluded_pre_registration": 2,
+        "duplicate_later": 0,
+        "duplicate_same_anchor": 0,
+        "excluded_other_test": 0,
+        "n_canary": 0,
+        "n_batches": 1,
+        "N_trials": 25,
+        "hits": 7,
+        "S": 2,
+        "canary_n_batches": 0,
+        "canary_hits": 0,
+        "canary_S": 0
+      }
+    },
+    {
+      "name": "r1_other_test_later_copy_is_duplicate_later_only",
+      "registration_ms": 1801440000000,
+      "batches": [
+        {
+          "name": "card5_after",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000010,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000006",
+          "participant": null
+        },
+        {
+          "name": "other_later_copy",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000030,
+          "hits": 20,
+          "dup": "later",
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000007",
+          "participant": null
+        }
+      ],
+      "expected": {
+        "excluded_pre_registration": 0,
+        "duplicate_later": 1,
+        "duplicate_same_anchor": 0,
+        "excluded_other_test": 0,
+        "n_canary": 0,
+        "n_batches": 1,
+        "N_trials": 25,
+        "hits": 7,
+        "S": 2,
+        "canary_n_batches": 0,
+        "canary_hits": 0,
+        "canary_S": 0
+      }
+    },
+    {
+      "name": "r1_other_test_same_anchor_is_duplicate_same_anchor_only",
+      "registration_ms": 1801440000000,
+      "batches": [
+        {
+          "name": "card5_after",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000010,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000008",
+          "participant": null
+        },
+        {
+          "name": "other_same_a",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000030,
+          "hits": 20,
+          "dup": "same_anchor",
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000009",
+          "participant": null
+        },
+        {
+          "name": "other_same_b",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000030,
+          "hits": 20,
+          "dup": "same_anchor",
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000000a",
+          "participant": null
+        }
+      ],
+      "expected": {
+        "excluded_pre_registration": 0,
+        "duplicate_later": 0,
+        "duplicate_same_anchor": 2,
+        "excluded_other_test": 0,
+        "n_canary": 0,
+        "n_batches": 1,
+        "N_trials": 25,
+        "hits": 7,
+        "S": 2,
+        "canary_n_batches": 0,
+        "canary_hits": 0,
+        "canary_S": 0
+      }
+    },
+    {
+      "name": "r1_registration_edge",
+      "registration_ms": 1801440000000,
+      "batches": [
+        {
+          "name": "other_at_registration",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000000,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000000b",
+          "participant": null
+        },
+        {
+          "name": "other_one_before",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801439999999,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000000c",
+          "participant": null
+        },
+        {
+          "name": "card5_at_registration",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000000d",
+          "participant": null
+        }
+      ],
+      "expected": {
+        "excluded_pre_registration": 1,
+        "duplicate_later": 0,
+        "duplicate_same_anchor": 0,
+        "excluded_other_test": 1,
+        "n_canary": 0,
+        "n_batches": 1,
+        "N_trials": 25,
+        "hits": 6,
+        "S": 1,
+        "canary_n_batches": 0,
+        "canary_hits": 0,
+        "canary_S": 0
+      }
+    },
+    {
+      "name": "r2_canary_edges_and_copies",
+      "registration_ms": 1801440000000,
+      "batches": [
+        {
+          "name": "canary_before",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801439999999,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000000e",
+          "participant": null
+        },
+        {
+          "name": "canary_at_registration",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000000,
+          "hits": 9,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000000f",
+          "participant": null
+        },
+        {
+          "name": "canary_later_copy",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000005,
+          "hits": 25,
+          "dup": "later",
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000010",
+          "participant": null
+        },
+        {
+          "name": "canary_same_anchor_a",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000006,
+          "hits": 25,
+          "dup": "same_anchor",
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000011",
+          "participant": null
+        },
+        {
+          "name": "canary_same_anchor_b",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000006,
+          "hits": 25,
+          "dup": "same_anchor",
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000012",
+          "participant": null
+        },
+        {
+          "name": "canary_after",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000007,
+          "hits": 4,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000013",
+          "participant": null
+        },
+        {
+          "name": "canary_other_test",
+          "source": "canary",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000008,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000014",
+          "participant": null
+        },
+        {
+          "name": "player_after",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000009,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000015",
+          "participant": null
+        }
+      ],
+      "expected": {
+        "excluded_pre_registration": 0,
+        "duplicate_later": 0,
+        "duplicate_same_anchor": 0,
+        "excluded_other_test": 0,
+        "n_canary": 7,
+        "n_batches": 1,
+        "N_trials": 25,
+        "hits": 7,
+        "S": 2,
+        "canary_n_batches": 2,
+        "canary_hits": 13,
+        "canary_S": 3
+      }
+    },
+    {
+      "name": "r1_r2_together",
+      "registration_ms": 1801440000000,
+      "batches": [
+        {
+          "name": "p1",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000001,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000016",
+          "participant": null
+        },
+        {
+          "name": "p2",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000002,
+          "hits": 3,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000017",
+          "participant": null
+        },
+        {
+          "name": "p_other",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000003,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000018",
+          "participant": null
+        },
+        {
+          "name": "p_pre",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801439999995,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000019",
+          "participant": null
+        },
+        {
+          "name": "p_late",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000004,
+          "hits": 25,
+          "dup": "later",
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000001a",
+          "participant": null
+        },
+        {
+          "name": "c_pre",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801439999999,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000001b",
+          "participant": null
+        },
+        {
+          "name": "c_in",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000005,
+          "hits": 8,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000001c",
+          "participant": null
+        },
+        {
+          "name": "c_in2",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000006,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000001d",
+          "participant": null
+        }
+      ],
+      "expected": {
+        "excluded_pre_registration": 1,
+        "duplicate_later": 1,
+        "duplicate_same_anchor": 0,
+        "excluded_other_test": 1,
+        "n_canary": 3,
+        "n_batches": 2,
+        "N_trials": 50,
+        "hits": 10,
+        "S": 0,
+        "canary_n_batches": 2,
+        "canary_hits": 14,
+        "canary_S": 4
+      }
+    }
+  ],
+  "stouffer": [
+    {
+      "name": "r3_one_batch_each",
+      "batches": [
+        {
+          "name": "a",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 9,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003e9",
+          "participant": "p1"
+        },
+        {
+          "name": "b",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200005,
+          "hits": 2,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003ea",
+          "participant": "p2"
+        },
+        {
+          "name": "c",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200009,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003eb",
+          "participant": "p3"
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 3,
+        "S_first": 1,
+        "Z_first": 0.2886751345948129,
+        "Z": 0.2886751345948129,
+        "first": [
+          "000000000000000000000000000003e9",
+          "000000000000000000000000000003ea",
+          "000000000000000000000000000003eb"
+        ]
+      }
+    },
+    {
+      "name": "r3_tie_on_sealed_at_decided_by_anchor_seq",
+      "batches": [
+        {
+          "name": "late_seq_listed_first",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 7,
+          "batch_id": "000000000000000000000000000003ec",
+          "participant": "p1"
+        },
+        {
+          "name": "early_seq",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 3,
+          "dup": null,
+          "anchor_seq": 2,
+          "batch_id": "000000000000000000000000000003ed",
+          "participant": "p1"
+        },
+        {
+          "name": "other",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200001,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003ee",
+          "participant": "p2"
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 2,
+        "S_first": -1,
+        "Z_first": -0.35355339059327373,
+        "Z": 3.6035533905932735,
+        "first": [
+          "000000000000000000000000000003ed",
+          "000000000000000000000000000003ee"
+        ]
+      }
+    },
+    {
+      "name": "r3_tie_on_sealed_at_and_anchor_seq_decided_by_batch_id_bytes",
+      "batches": [
+        {
+          "name": "hi",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 3,
+          "batch_id": "80000000000000000000000000000000",
+          "participant": "p1"
+        },
+        {
+          "name": "lo",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 2,
+          "dup": null,
+          "anchor_seq": 3,
+          "batch_id": "7fffffffffffffffffffffffffffffff",
+          "participant": "p1"
+        },
+        {
+          "name": "hi2",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 1,
+          "dup": null,
+          "anchor_seq": 3,
+          "batch_id": "9f000000000000000000000000000000",
+          "participant": "p2"
+        },
+        {
+          "name": "lo2",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 11,
+          "dup": null,
+          "anchor_seq": 3,
+          "batch_id": "0affffffffffffffffffffffffffffff",
+          "participant": "p2"
+        },
+        {
+          "name": "x1",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 12,
+          "dup": null,
+          "anchor_seq": 3,
+          "batch_id": "101010101010101010101010101010fe",
+          "participant": "p3"
+        },
+        {
+          "name": "x2",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 4,
+          "dup": null,
+          "anchor_seq": 3,
+          "batch_id": "101010101010101010101010101010ff",
+          "participant": "p3"
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 3,
+        "S_first": 10,
+        "Z_first": 2.886751345948129,
+        "Z": 4.08248290463863,
+        "first": [
+          "7fffffffffffffffffffffffffffffff",
+          "0affffffffffffffffffffffffffffff",
+          "101010101010101010101010101010fe"
+        ]
+      }
+    },
+    {
+      "name": "r3_two_quarters",
+      "batches": [
+        {
+          "name": "q2_listed_first",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1806624000000,
+          "hits": 18,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003f5",
+          "participant": "p1"
+        },
+        {
+          "name": "q1_first",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1806537599000,
+          "hits": 3,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003f6",
+          "participant": "p1"
+        },
+        {
+          "name": "q1_second",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1806537599500,
+          "hits": 9,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003f7",
+          "participant": "p1"
+        },
+        {
+          "name": "other",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003f8",
+          "participant": "p2"
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 2,
+        "S_first": 0,
+        "Z_first": 0.0,
+        "Z": 3.76896895966552,
+        "first": [
+          "000000000000000000000000000003f6",
+          "000000000000000000000000000003f8"
+        ]
+      }
+    },
+    {
+      "name": "r3_more_than_20_in_a_quarter",
+      "batches": [
+        {
+          "name": "m0",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 14,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003f9",
+          "participant": "p1"
+        },
+        {
+          "name": "m1",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859201000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003fa",
+          "participant": "p1"
+        },
+        {
+          "name": "m2",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859202000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003fb",
+          "participant": "p1"
+        },
+        {
+          "name": "m3",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859203000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003fc",
+          "participant": "p1"
+        },
+        {
+          "name": "m4",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859204000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003fd",
+          "participant": "p1"
+        },
+        {
+          "name": "m5",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859205000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003fe",
+          "participant": "p1"
+        },
+        {
+          "name": "m6",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859206000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "000000000000000000000000000003ff",
+          "participant": "p1"
+        },
+        {
+          "name": "m7",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859207000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000400",
+          "participant": "p1"
+        },
+        {
+          "name": "m8",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859208000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000401",
+          "participant": "p1"
+        },
+        {
+          "name": "m9",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859209000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000402",
+          "participant": "p1"
+        },
+        {
+          "name": "m10",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859210000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000403",
+          "participant": "p1"
+        },
+        {
+          "name": "m11",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859211000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000404",
+          "participant": "p1"
+        },
+        {
+          "name": "m12",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859212000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000405",
+          "participant": "p1"
+        },
+        {
+          "name": "m13",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859213000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000406",
+          "participant": "p1"
+        },
+        {
+          "name": "m14",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859214000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000407",
+          "participant": "p1"
+        },
+        {
+          "name": "m15",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859215000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000408",
+          "participant": "p1"
+        },
+        {
+          "name": "m16",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859216000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000409",
+          "participant": "p1"
+        },
+        {
+          "name": "m17",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859217000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000040a",
+          "participant": "p1"
+        },
+        {
+          "name": "m18",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859218000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000040b",
+          "participant": "p1"
+        },
+        {
+          "name": "m19",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859219000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000040c",
+          "participant": "p1"
+        },
+        {
+          "name": "m20",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859220000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000040d",
+          "participant": "p1"
+        },
+        {
+          "name": "m21",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859221000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000040e",
+          "participant": "p1"
+        },
+        {
+          "name": "m22",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859222000,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000040f",
+          "participant": "p1"
+        },
+        {
+          "name": "m23",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859223000,
+          "hits": 7,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000410",
+          "participant": "p1"
+        },
+        {
+          "name": "m24",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859224000,
+          "hits": 5,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000411",
+          "participant": "p1"
+        },
+        {
+          "name": "other",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 4,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000412",
+          "participant": "p2"
+        },
+        {
+          "name": "o2",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200007,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000413",
+          "participant": "p2"
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 2,
+        "S_first": 8,
+        "Z_first": 2.82842712474619,
+        "Z": 2.2135943621178655,
+        "first": [
+          "000000000000000000000000000003f9",
+          "00000000000000000000000000000412"
+        ]
+      }
+    },
+    {
+      "name": "r3_first_counted_ignores_excluded_batches",
+      "batches": [
+        {
+          "name": "pre_registration",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801439999990,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000414",
+          "participant": "p1"
+        },
+        {
+          "name": "other_test",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000001,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000415",
+          "participant": "p1"
+        },
+        {
+          "name": "later_copy",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000002,
+          "hits": 25,
+          "dup": "later",
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000416",
+          "participant": "p1"
+        },
+        {
+          "name": "same_anchor_copy",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000002,
+          "hits": 25,
+          "dup": "same_anchor",
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000417",
+          "participant": "p1"
+        },
+        {
+          "name": "canary",
+          "source": "canary",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000003,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000418",
+          "participant": "p1"
+        },
+        {
+          "name": "first_counted",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000100,
+          "hits": 6,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "00000000000000000000000000000419",
+          "participant": "p1"
+        },
+        {
+          "name": "second_counted",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1801440000200,
+          "hits": 20,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000041a",
+          "participant": "p1"
+        },
+        {
+          "name": "only_other_test",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000001,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000041b",
+          "participant": "p2"
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 1,
+        "S_first": 1,
+        "Z_first": 0.5,
+        "Z": 5.65685424949238,
+        "first": [
+          "00000000000000000000000000000419"
+        ]
+      }
+    },
+    {
+      "name": "r3_participants_compared_as_json_values",
+      "batches": [
+        {
+          "name": "int_one",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200000,
+          "hits": 9,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000041c",
+          "participant": 1
+        },
+        {
+          "name": "string_one",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200001,
+          "hits": 3,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000041d",
+          "participant": "1"
+        },
+        {
+          "name": "int_one_again",
+          "source": "player",
+          "test_id": "card5",
+          "sealed_at_ms": 1803859200002,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000041e",
+          "participant": 1
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 2,
+        "S_first": 2,
+        "Z_first": 0.7071067811865475,
+        "Z": 5.292893218813451,
+        "first": [
+          "0000000000000000000000000000041d",
+          "0000000000000000000000000000041c"
+        ]
+      }
+    },
+    {
+      "name": "r3_no_counted_batch",
+      "batches": [
+        {
+          "name": "other_test",
+          "source": "player",
+          "test_id": "card6",
+          "sealed_at_ms": 1801440000001,
+          "hits": 25,
+          "dup": null,
+          "anchor_seq": 1,
+          "batch_id": "0000000000000000000000000000041f",
+          "participant": "p1"
+        }
+      ],
+      "registration_ms": 1801440000000,
+      "expected": {
+        "k": 0,
+        "S_first": 0,
+        "Z_first": null,
+        "Z": null,
+        "first": []
+      }
+    }
+  ],
+  "interval": [
+    {
+      "name": "r4_n25_above",
+      "N_trials": 25,
+      "n_batches": 1,
+      "hits": 6,
+      "expected": {
+        "low": -11.680000000000001,
+        "high": 19.68,
+        "half": 15.68
+      },
+      "half_width_pp": 15.68
+    },
+    {
+      "name": "r4_n25_at",
+      "N_trials": 25,
+      "n_batches": 1,
+      "hits": 5,
+      "expected": {
+        "low": -15.68,
+        "high": 15.68,
+        "half": 15.68
+      },
+      "half_width_pp": 15.68
+    },
+    {
+      "name": "r4_n25_below",
+      "N_trials": 25,
+      "n_batches": 1,
+      "hits": 4,
+      "expected": {
+        "low": -19.68,
+        "high": 11.68,
+        "half": 15.68
+      },
+      "half_width_pp": 15.68
+    },
+    {
+      "name": "r4_n5000_above",
+      "N_trials": 5000,
+      "n_batches": 200,
+      "hits": 1100,
+      "expected": {
+        "low": 0.8912565670994927,
+        "high": 3.1087434329005053,
+        "half": 1.1087434329005064
+      },
+      "half_width_pp": 1.108743
+    },
+    {
+      "name": "r4_n5000_at",
+      "N_trials": 5000,
+      "n_batches": 200,
+      "hits": 1000,
+      "expected": {
+        "low": -1.1087434329005064,
+        "high": 1.1087434329005064,
+        "half": 1.1087434329005064
+      },
+      "half_width_pp": 1.108743
+    },
+    {
+      "name": "r4_n5000_below",
+      "N_trials": 5000,
+      "n_batches": 200,
+      "hits": 900,
+      "expected": {
+        "low": -3.108743432900508,
+        "high": -0.8912565670994954,
+        "half": 1.1087434329005064
+      },
+      "half_width_pp": 1.108743
+    },
+    {
+      "name": "r4_n250000_above",
+      "N_trials": 250000,
+      "n_batches": 10000,
+      "hits": 55000,
+      "expected": {
+        "low": 1.843199999999999,
+        "high": 2.156799999999999,
+        "half": 0.1568
+      },
+      "half_width_pp": 0.1568
+    },
+    {
+      "name": "r4_n250000_at",
+      "N_trials": 250000,
+      "n_batches": 10000,
+      "hits": 50000,
+      "expected": {
+        "low": -0.1568,
+        "high": 0.1568,
+        "half": 0.1568
+      },
+      "half_width_pp": 0.1568
+    },
+    {
+      "name": "r4_n250000_below",
+      "N_trials": 250000,
+      "n_batches": 10000,
+      "hits": 45000,
+      "expected": {
+        "low": -2.156800000000002,
+        "high": -1.8432000000000017,
+        "half": 0.1568
+      },
+      "half_width_pp": 0.1568
+    },
+    {
+      "name": "r4_no_trials",
+      "N_trials": 0,
+      "n_batches": 0,
+      "hits": 0,
+      "expected": null,
+      "half_width_pp": null
+    }
+  ],
+  "looks": [
+    {
+      "name": "r5_reg1801440000000_2027-Q1",
+      "registration_ms": 1801440000000,
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "j": 1
+    },
+    {
+      "name": "r5_reg1801440000000_2027-Q2",
+      "registration_ms": 1801440000000,
+      "release_id": "2027-Q2",
+      "cut_ms": 1814400000000,
+      "j": 2
+    },
+    {
+      "name": "r5_reg1801440000000_2027-Q4",
+      "registration_ms": 1801440000000,
+      "release_id": "2027-Q4",
+      "cut_ms": 1830297600000,
+      "j": 4
+    },
+    {
+      "name": "r5_reg1801440000000_2028-Q1",
+      "registration_ms": 1801440000000,
+      "release_id": "2028-Q1",
+      "cut_ms": 1838160000000,
+      "j": 5
+    },
+    {
+      "name": "r5_reg1801440000000_2031-Q4",
+      "registration_ms": 1801440000000,
+      "release_id": "2031-Q4",
+      "cut_ms": 1956528000000,
+      "j": 20
+    },
+    {
+      "name": "r5_reg1801440000000_2032-Q1",
+      "registration_ms": 1801440000000,
+      "release_id": "2032-Q1",
+      "cut_ms": 1964390400000,
+      "j": 21
+    },
+    {
+      "name": "r5_reg1801440000000_2026-Q4",
+      "registration_ms": 1801440000000,
+      "release_id": "2026-Q4",
+      "cut_ms": 1798761600000,
+      "j": 0
+    },
+    {
+      "name": "r5_reg1801440000000_2026-Q3",
+      "registration_ms": 1801440000000,
+      "release_id": "2026-Q3",
+      "cut_ms": 1790812800000,
+      "j": 0
+    },
+    {
+      "name": "r5_reg1801440000000_2020-Q1",
+      "registration_ms": 1801440000000,
+      "release_id": "2020-Q1",
+      "cut_ms": 1585699200000,
+      "j": 0
+    },
+    {
+      "name": "r5_reg1806537600000_2027-Q1",
+      "registration_ms": 1806537600000,
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "j": 0
+    },
+    {
+      "name": "r5_reg1806537600000_2027-Q2",
+      "registration_ms": 1806537600000,
+      "release_id": "2027-Q2",
+      "cut_ms": 1814400000000,
+      "j": 1
+    },
+    {
+      "name": "r5_reg1806537600000_2027-Q3",
+      "registration_ms": 1806537600000,
+      "release_id": "2027-Q3",
+      "cut_ms": 1822348800000,
+      "j": 2
+    },
+    {
+      "name": "r5_reg1806537600000_2031-Q4",
+      "registration_ms": 1806537600000,
+      "release_id": "2031-Q4",
+      "cut_ms": 1956528000000,
+      "j": 19
+    },
+    {
+      "name": "r5_reg1806537600000_2032-Q1",
+      "registration_ms": 1806537600000,
+      "release_id": "2032-Q1",
+      "cut_ms": 1964390400000,
+      "j": 20
+    },
+    {
+      "name": "r5_reg1806537600000_2032-Q2",
+      "registration_ms": 1806537600000,
+      "release_id": "2032-Q2",
+      "cut_ms": 1972252800000,
+      "j": 21
+    },
+    {
+      "name": "r5_reg1806537599999_2027-Q1",
+      "registration_ms": 1806537599999,
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "j": 1
+    },
+    {
+      "name": "r5_reg1806537599999_2027-Q2",
+      "registration_ms": 1806537599999,
+      "release_id": "2027-Q2",
+      "cut_ms": 1814400000000,
+      "j": 2
+    },
+    {
+      "name": "r5_reg1806537600001_2027-Q1",
+      "registration_ms": 1806537600001,
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "j": 0
+    },
+    {
+      "name": "r5_reg1806537600001_2027-Q2",
+      "registration_ms": 1806537600001,
+      "release_id": "2027-Q2",
+      "cut_ms": 1814400000000,
+      "j": 1
+    },
+    {
+      "name": "r5_reg1806537600001_2027-Q3",
+      "registration_ms": 1806537600001,
+      "release_id": "2027-Q3",
+      "cut_ms": 1822348800000,
+      "j": 2
+    }
+  ],
+  "anchors": [
+    {
+      "name": "r5_t_anchor_equals_cut",
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "gen_times_ms": [
+        1806537595000,
+        1806537600000
+      ],
+      "t_anchor_ms": 1806537600000,
+      "after_cut": false
+    },
+    {
+      "name": "r5_t_anchor_equals_cut_rounded_up",
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "gen_times_ms": [
+        1806537595000,
+        1806537599999
+      ],
+      "t_anchor_ms": 1806537600000,
+      "after_cut": false
+    },
+    {
+      "name": "r5_t_anchor_one_second_after_cut",
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "gen_times_ms": [
+        1806537595000,
+        1806537600001
+      ],
+      "t_anchor_ms": 1806537601000,
+      "after_cut": true
+    },
+    {
+      "name": "r5_t_anchor_after_cut_later_token",
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "gen_times_ms": [
+        1806537595000,
+        1806537601000
+      ],
+      "t_anchor_ms": 1806537601000,
+      "after_cut": true
+    },
+    {
+      "name": "r5_only_the_later_token_counts",
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "gen_times_ms": [
+        1806537601000,
+        1806537595000
+      ],
+      "t_anchor_ms": 1806537601000,
+      "after_cut": true
+    },
+    {
+      "name": "r5_both_tokens_before",
+      "release_id": "2027-Q1",
+      "cut_ms": 1806537600000,
+      "gen_times_ms": [
+        1806537597000,
+        1806537598000
+      ],
+      "t_anchor_ms": 1806537598000,
+      "after_cut": false
+    }
+  ],
+  "display": {
+    "z": [
+      {
+        "value": 5.55,
+        "shown": "5.55"
+      },
+      {
+        "value": 5.549999,
+        "shown": "5.54"
+      },
+      {
+        "value": -5.546,
+        "shown": "-5.54"
+      },
+      {
+        "value": 0.29,
+        "shown": "0.29"
+      },
+      {
+        "value": 4.35,
+        "shown": "4.35"
+      },
+      {
+        "value": 4.2199,
+        "shown": "4.21"
+      },
+      {
+        "value": -0.004,
+        "shown": "0.00"
+      },
+      {
+        "value": 4.22,
+        "shown": "4.22"
+      },
+      {
+        "value": -4.22,
+        "shown": "-4.22"
+      },
+      {
+        "value": 0.0,
+        "shown": "0.00"
+      }
+    ],
+    "interval": [
+      {
+        "low": -0.1234,
+        "high": 0.1901,
+        "shown": [
+          "-0.13",
+          "0.20"
+        ]
+      }
+    ]
+  }
+}

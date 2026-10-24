@@ -15,7 +15,7 @@ Exit status:
   2  usage error
   3  the export could not be downloaded in a usable form: classification "export_unavailable"
 
-A failed verification is an INTEGRITY ALERT, never an exclusion (SPEC amendment 4). This tool
+A failed verification is an INTEGRITY ALERT, never an exclusion (SPEC 9.1, 9.3). This tool
 never drops, skips or repairs data to make a run pass, and it fails closed: a verifier that
 crashes, hangs or prints no result is an alert too.
 
@@ -73,7 +73,7 @@ import fetch_export as fe  # noqa: E402
 REPORT_FORMAT = "precog-nightly-report/v1"
 NOTICE = (
     "A failure here is an INTEGRITY ALERT and not an exclusion: no batch is dropped, skipped or "
-    "repaired to make a run pass (SPEC amendment 4). The release is invalid until the fault is "
+    "repaired to make a run pass (SPEC 9.1, 9.3). The release is invalid until the fault is "
     "explained and a corrected release is issued from the raw data."
 )
 VERIFIER_ARGV = [sys.executable, "-m", "precog_verifier", "verify-release"]
@@ -185,7 +185,8 @@ def classify_verifier(exit_code: int | None, result: str | None, timed_out: bool
     return ALERT, "verifier.inconsistent"
 
 
-def run_verifier(release_dir: Path, timeout: float, as_of: str | None = None, require_production: bool = False) -> dict:
+def run_verifier(release_dir: Path, timeout: float, as_of: str | None = None, require_production: bool = False,
+                 registration_ms: str | None = None) -> dict:
     env = dict(os.environ)
     env["PYTHONIOENCODING"] = "utf-8"
     src = HERE.parent / "src"
@@ -194,7 +195,8 @@ def run_verifier(release_dir: Path, timeout: float, as_of: str | None = None, re
     try:
         p = subprocess.run(
             [*VERIFIER_ARGV, str(release_dir), *(["--as-of", as_of] if as_of is not None else []),
-             *(["--require-production"] if require_production else [])],
+             *(["--require-production"] if require_production else []),
+             *(["--registration-ms", registration_ms] if registration_ms is not None else [])],
             capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout, env=env,
         )
         return {"exit_code": p.returncode, "stdout": p.stdout, "stderr": p.stderr, "timed_out": False}
@@ -274,7 +276,7 @@ def _now_ms() -> int:
 
 
 def _download_as_of() -> str:
-    """The verifier --as-of for a live run: the wall clock when the download starts (SPEC amendment 10)."""
+    """The verifier --as-of for a live run: the wall clock when the download starts (SPEC 10.1)."""
     return str(_now_ms())
 
 
@@ -435,6 +437,7 @@ def _parser() -> argparse.ArgumentParser:
     m = p.add_mutually_exclusive_group()
     m.add_argument("--require-production", action="store_true", help="a mock authority or mock beacon in the manifest is an alert (the default for a live --base-url run)")
     m.add_argument("--allow-mock", action="store_true", help="a live run accepts mock authorities and a mock beacon with a warning (tests only)")
+    p.add_argument("--registration-ms", default=None, metavar="MS", help="pass --registration-ms MS to verify-release: the manifest must carry this registration time (Unix ms, digits only). Off by default; the registration deploy turns it on")
     p.add_argument("--report", required=True, metavar="FILE", help="write the JSON report here")
     p.add_argument("--summary", default=None, metavar="FILE", help="write a short Markdown summary here (codes and counts only)")
     p.add_argument("--work-dir", default=None, metavar="DIR", help="where to put the downloaded release (must be empty or absent)")
@@ -490,6 +493,8 @@ def run(args) -> int:
             if work_root.exists() and (not work_root.is_dir() or any(work_root.iterdir())):
                 raise Usage("--work-dir must be empty or absent")
 
+    if args.registration_ms is not None and not re.fullmatch(r"[0-9]{1,15}", args.registration_ms):
+        raise Usage("--registration-ms must be Unix milliseconds (digits only, at most 15)")
     started = _now()
     rep = {
         "format": REPORT_FORMAT,
@@ -573,7 +578,7 @@ def run(args) -> int:
             if previous is not None:
                 rep["alerts"] = state_alerts(previous, res.exported_seq, res.latest_seq, prev_hash)  # a valid state: no other alert exists
 
-        proc = run_verifier(release_dir, args.verifier_timeout, as_of, require_production)
+        proc = run_verifier(release_dir, args.verifier_timeout, as_of, require_production, *([args.registration_ms] if args.registration_ms is not None else []))
         out = _clip(proc["stdout"])
         parsed = parse_verifier_output(out)
         cls, synthetic = classify_verifier(proc["exit_code"], parsed["result"], proc["timed_out"])

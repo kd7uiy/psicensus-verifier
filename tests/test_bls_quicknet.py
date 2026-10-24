@@ -287,7 +287,7 @@ def test_a_tampered_cached_round_is_replaced_by_a_verified_fetch(quicknet_regist
     res = verify_release(data)
     assert res.ok, [(e.code, e.detail) for e in res.errors]
     assert [(w.code, w.detail) for w in res.warnings if w.code.startswith("round.")] == [("round.cache_bad", "round 100 fetched from the beacon")]
-    # the permutation control (amendment 12, approved 2026-10-11) may ask for its own seed round; only round 100 counts here
+    # the permutation control (SPEC 9.11) may ask for its own seed round; only round 100 counts here
     assert [c for c in op.calls if c["url"].endswith("/public/100")] and all(c["url"].endswith(("/public/100", "/public/" + str(res.analysis.permutation["round"]))) for c in op.calls)
     assert len([c for c in op.calls if c["url"].endswith("/public/100")]) == 1
 

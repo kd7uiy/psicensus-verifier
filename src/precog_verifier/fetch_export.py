@@ -768,7 +768,7 @@ def _fetch_header(budget: _Budget, sources: list, height: int, messages: set, pa
 
 def _download_headers(budget: _Budget, proofs: dict, out: Path, header_sources) -> int:
     """Best effort: write btc_headers.jsonl with one line {"height", "header"} per Bitcoin height named by the downloaded
-    proofs, sorted by height (SPEC amendment 15). A line is written only for an acceptable header whose merkle root equals a
+    proofs, sorted by height (SPEC 11.4). A line is written only for an acceptable header whose merkle root equals a
     message that some proof computes at that height; nothing else is kept, so a header that a source got wrong, or a wrong
     line left over from an earlier run, never survives. Each header is fetched once, from the first source that has a
     matching one; one already in an earlier btc_headers.jsonl of this directory is reused only if it matches. A header that

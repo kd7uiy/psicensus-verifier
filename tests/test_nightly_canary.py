@@ -178,7 +178,7 @@ def test_a_release_without_any_anchor_time_gives_no_warning_and_no_crash(tmp_pat
     assert rc == 0 and CODE not in rep["warnings"]
 
 
-# ---------------------------------------------------------------- canary.unverified (SPEC amendment 9)
+# ---------------------------------------------------------------- canary.unverified (SPEC 9.7)
 def _relabel_first_player(d, registration_ms=None):
     rows = tn.jl(d / "batches.jsonl")
     next(r for r in rows if r["source"] == "player" and r["sealed_at_ms"] >= 1700000000000)["source"] = "canary"

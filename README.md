@@ -1,7 +1,7 @@
 # precog-verifier
 
 The reference verifier for the Psi Census study (https://psicensus.com). It checks the study's published
-data, or one player's receipt, using only the public format in [`SPEC.md`](SPEC.md) (v1). It has no
+data, or one player's receipt, using only the public format in [`SPEC.md`](SPEC.md) (specification version 1, the version the study names at registration; later changes are published as dated amendments). It has no
 runtime dependencies (Python standard library only) and needs no access to the operator's systems.
 The code is short on purpose, so that you can read all of it.
 
@@ -37,10 +37,12 @@ that was removed from the middle of the chain, breaks one of the checks above. A
 error is invalid and the verifier prints no `S` or `z`. It never "excludes the bad rows and carries
 on", because that would let someone drop unwelcome batches by corrupting them.
 
-**Exclusions.** Exactly three, all fixed before a batch's target exists: batches with `source = canary`
-(analysed separately), batches sealed before `registration_ms` in the manifest, and repeated copies of a
+**Exclusions.** Exactly four, all fixed before a batch's target exists: batches with `source = canary`
+(analysed separately), batches sealed before `registration_ms` in the manifest, repeated copies of a
 batch ID (the first-committed copy counts; later copies do not; copies in the same earliest anchor are all
-dropped). Duplicates are printed as the warning `batch.duplicate_id`. The counts of all exclusions are printed.
+dropped), and, from `registration_ms` on, a first copy whose `test_id` is not `card5` (SPEC 9.2; it
+is counted in `excluded_other_test` and gives the warning `batch.other_test_id`, never an error). Duplicates are
+printed as the warning `batch.duplicate_id`. The counts of all exclusions are printed.
 
 ### What the verifier does not prove
 
@@ -74,18 +76,18 @@ Be sceptical about these. Each one is a place where trust in the operator, or yo
    compromised, or both timestamp authorities backdate a token at the operator's request. The
    verifier cannot detect that. It does check that the two authorities named in each anchor are two
    different `id`s in the manifest; it does not check that they are different companies. It warns
-   (`tsa.same_root`, SPEC amendment 13) when an anchor's tokens all chain to one `root_sha256`,
+   (`tsa.same_root`, SPEC 11.2) when an anchor's tokens all chain to one `root_sha256`,
    but different roots do not prove different operators either, so read the manifest.
 6. **The manifest and the unhashed row fields are taken from the operator.** `registration_ms`, the
    `source` field (`player` or `canary`), and the authority list are not covered by any hash or
-   timestamp. Compare `registration_ms` with the registered date (or pass the published value with `--registration-ms`, which fails with `manifest.registration_mismatch` when the manifest differs: SPEC amendment 14), and compare the canary count with the
+   timestamp. Compare `registration_ms` with the registered date (or pass the published value with `--registration-ms`, which fails with `manifest.registration_mismatch` when the manifest differs: SPEC 11.3), and compare the canary count with the
    expected cadence (one canary batch every 4 hours). Canary rows are also checked: their guesses must
-   be the ones derived from a cron slot just before `sealed_at_ms` (SPEC amendment 9, approved 2026-10-10; section 3.8), so a
+   be the ones derived from a cron slot just before `sealed_at_ms` (SPEC 9.7; section 3.8), so a
    relabelled player batch is an error. See section 6, "Known gaps", which also lists the checks that are not yet in the code.
 7. **Mock authorities and the mock beacon verify too.** The verifier supports test-only authorities
    (`kind: mock-hmac`) and a test beacon (`network: mock-beacon`), whose keys and outputs are public.
    A release that uses them proves nothing. The verifier prints the warnings `manifest.mock_authority` and
-   `manifest.mock_beacon` (SPEC amendment 13), and with `--require-production` they are errors
+   `manifest.mock_beacon` (SPEC 11.2), and with `--require-production` they are errors
    (exit status 1). Before you trust any `result OK`, run with `--require-production` and compare
    `manifest.json` with the values in "Expected production manifest" below. The bundled sample releases
    under `tests/data/` use mocks on purpose.
@@ -155,7 +157,8 @@ as_of_ms 1791246600000
 registration_ms 0 source=manifest
 release_id test-real-fixtures-2026-10-05
 analysis n_batches=7 N_trials=175 hits=32 rate=0.182857 S=-3 z=-0.566947
-excluded pre_registration=0 duplicate_later=0 duplicate_same_anchor=0
+excluded pre_registration=0 duplicate_later=0 duplicate_same_anchor=0 other_test=0
+interval pp_low=-7.640769 pp_high=4.212197
 canary seen=0 n_batches=0 N_trials=0 hits=0 rate=n/a S=0 z=n/a
 secondary unavailable code=secondary.no_participants
 permutation unavailable code=permutation.pending round=32827710
@@ -183,7 +186,7 @@ python -m precog_verifier verify-release ./release --require-production
 ```
 
 `--registration-ms <ms>` is optional: it fails the run with `manifest.registration_mismatch` when the manifest's
-`registration_ms` differs from the value you pass (SPEC amendment 14). No such value exists before the study is
+`registration_ms` differs from the value you pass (SPEC 11.3). No such value exists before the study is
 registered, so run without the flag for now; the value will be published with the registered study.
 
 What to expect today: the study is not registered yet, so the manifest's `registration_ms` is the far-future
@@ -231,8 +234,12 @@ Exit status: 0 means no errors, 1 means at least one error, 2 means a usage prob
 result OK|FAIL
 release_id <id>
 analysis n_batches=… N_trials=… hits=… rate=… S=… z=…      (or: analysis withheld n_batches=… N_trials=…)
-excluded pre_registration=… duplicate_later=… duplicate_same_anchor=…
-canary seen=… n_batches=… N_trials=… hits=… rate=… S=… z=…  (the same formula, canary batches only)
+look j=… cut_ms=…                                              (only when the release_id is YYYY-Qn, SPEC 9.12)
+excluded pre_registration=… duplicate_later=… duplicate_same_anchor=… other_test=…
+interval pp_low=… pp_high=…                                    (95% interval for the hit rate minus 20%, in percentage points;
+                                                               `interval withheld` when the analysis is, `n/a` values with no trials)
+canary seen=… n_batches=… N_trials=… hits=… rate=… S=… z=…  (the same formula, the canary set only: section 3.8)
+secondary stouffer_first k=… Z=…                               (after `secondary stouffer`; first batch of each participant, SPEC 9.10)
 ots confirmed=… pending=… unchecked=… late=… missing=…          (the proofs of the daily heads, section 3.7)
 warning <code> [anchor_seq=…] [batch_id=…] [detail=…]
 error <code> [anchor_seq=…] [batch_id=…] [detail=…]
@@ -251,7 +258,13 @@ errors <n> warnings <m>
   `ots.pending`, `ots.unchecked`, `ots.late` and `ots.missing` about the Bitcoin proofs of the heads (each once, with
   `count=N` and the first 20 dates; section 3.7; `--require-production` does not make them errors).
   With `--require-production` the two `manifest.mock_*` notices are errors instead.
-- `error manifest.registration_mismatch` (only with `--registration-ms N`, SPEC amendment 14): the manifest's
+- `warning batch.other_test_id` (SPEC 9.2; `count=N` in the detail): N first-copy player rows from
+  `registration_ms` on carry a `test_id` other than `card5`. They are not counted and are shown as `other_test=N`.
+- `error look.after_cut` (SPEC 9.12; one per anchor, only when `release_id` is `YYYY-Qn`): the anchor's
+  time is after the end of that quarter. The line `look j=<n> cut_ms=<ms>` gives the look number `n` (the number of
+  quarter starts after `registration_ms`, up to and including the cut) and the cut. The tool prints `n` and does not
+  judge it; the range of looks is the study's.
+- `error manifest.registration_mismatch` (only with `--registration-ms N`, SPEC 11.3): the manifest's
   `registration_ms` is not `N`. The output always has a line `registration_ms <value> source=manifest` (or
   `source=option` when you passed the value and it matched); `source=manifest` means the value that decides which
   batches count was taken from the operator's manifest only. `N` is Unix milliseconds, digits only.
@@ -275,8 +288,8 @@ Error codes are stable identifiers; the full list and their order are in SPEC se
 
 Each step is a short module in `src/precog_verifier/`. The specification is [`SPEC.md`](SPEC.md); you can
 write your own verifier from it. The frozen test vectors in `vectors/*.json` are byte-exact cases any
-implementation should reproduce. The domain tags are `precog/leaf/v1`, `precog/anchor/v1`, `precog/target/v1`;
-they are historic and fixed.
+implementation should reproduce. The domain tags are `precog/leaf/v1`, `precog/anchor/v1`, `precog/target/v1`,
+`precog/canary/v1` and `precog/permutation/v1` (SPEC 1); they are historic and fixed.
 
 ### 3.1 Leaf (SPEC 3)
 `leaf = sha256("precog/leaf/v1" || batch_id || str8(test_id) || guesses(25 bytes) || u64(sealed_at_ms))`.
@@ -349,10 +362,10 @@ sequence 0 in a release that holds an anchor is also `head.mismatch`.
 
 The point of heads is external anchoring: the head's `anchor_hash` is submitted to OpenTimestamps calendars, which
 commit it into a Bitcoin block. Once the calendars have done so, `heads/<date>.ots` is published next to the head
-(the export serves it at `/export/ots`). SPEC amendment 15 says what the verifier does with these files; it
+(the export serves it at `/export/ots`). SPEC 11.4 says what the verifier does with these files; it
 needs no Bitcoin node and trusts neither the operator, the calendars nor a block explorer.
 
-**What is checked.** Each `heads/<date>.ots` must parse strictly (SPEC amendment 15): the OpenTimestamps magic, version 1,
+**What is checked.** Each `heads/<date>.ots` must parse strictly (SPEC 11.4): the OpenTimestamps magic, version 1,
 file hash sha256, the digest equal to the head's `anchor_hash`, a tree of sha256, append and prepend steps only
 (arguments of at most 4096 bytes, at most 256 steps deep), attestations of the kinds pending, bitcoin or unknown, and
 no byte after the tree; otherwise `ots.invalid` (an error). For each Bitcoin attestation the verifier computes the 32
@@ -394,7 +407,7 @@ for its own work, not for its place in the chain; forging an acceptable header c
 work of a block at today's difficulty, for a proof whose hash was fixed beforehand. A confirmed proof shows that the
 head's hash existed by the header's time. It does not show that the head is complete or honest (that is section 1,
 item 1, and the checks above). A pending or unchecked proof shows nothing yet. The NIST pulse of a head is
-checked only when the verifier is online and only as a cross-check (SPEC amendment 16): the
+checked only when the verifier is online and only as a cross-check (SPEC 11.5): the
 verifier fetches the pulse from the `uri` if it is on beacon.nist.gov and warns (`nist.mismatch`,
 `nist.out_of_window`, `nist.foreign_uri`, `nist.unchecked`) when the value or the time does not fit. It is never an
 error, because the pulse is not part of any hashed input. With `--offline` nothing about pulses is checked. To
@@ -410,15 +423,17 @@ The proof's digest is the head's `anchor_hash` (the 32 bytes themselves), which 
 ### 3.8 Canary batches
 The operator runs a bot that plays through the whole pipeline (`source = canary`), about
 one batch every 4 hours. The verifier analyses canary batches separately with the same formula and
-prints them on the `canary` line. They are never part of the study result. The canary exists to detect bugs:
+prints them on the `canary` line. `seen` counts every canary row; the other figures use the canary set of SPEC
+9.9: `card5` rows sealed at or after `registration_ms`, first copy only, so the beta's canary rows
+from before registration are in `seen` only. They are never part of the study result. The canary exists to detect bugs:
 an apparent effect in canary data means a fault in the pipeline, and the study's own pre-registration says
 the main result is then void until it is found. Because `source` is not hashed (section 6), the canary's
 guesses are not random: they are derived from the cron slot as `guess[i] = u64(sha256("precog/canary/v1" ||
-u64(slot_ms) || u32(i))[0:8]) mod 5` (SPEC amendment 9, approved 2026-10-10), and the verifier rejects a `canary` row whose
+u64(slot_ms) || u32(i))[0:8]) mod 5` (SPEC 9.7), and the verifier rejects a `canary` row whose
 guesses (and `test_id` `card5`) do not match a whole-minute slot in the 10 minutes before `sealed_at_ms`:
 `canary.guesses_mismatch`, an error from `registration_ms` on, and the warning `canary.unverified` (with a count) for
 earlier rows from the beta, which used random guesses.
-Amendment 17, approved by Ben 2026-10-16: the other direction is checked too. A `player` row whose guesses are the canary
+The other direction is checked too (SPEC 9.8). A `player` row whose guesses are the canary
 guesses of a slot in that same window is a canary batch published as a player batch: `canary.relabelled`, an error from
 `registration_ms` on (one per row, the detail names the slot), and a warning with a count for earlier rows.
 
@@ -431,9 +446,10 @@ All of the numbers come from one release directory and this code; there is no hi
 2. `python -m precog_verifier verify-release ./release`. `n_batches`, `N_trials`, `hits`, `rate`, `S` and `z`
    are printed on the `analysis` line.
 3. By hand, the counted batches are the rows with `source == "player"`, `sealed_at_ms >= registration_ms`
-   (from the manifest) that are the first-committed copy of their `batch_id`. Then
+   (from the manifest) and `test_id == "card5"` that are the first-committed copy of their `batch_id`. Then
    `N_trials = 25 * n_batches`, `S = sum(hits) - 5 * n_batches`, `z = S / sqrt(N_trials * 0.16)`.
-   The code is `src/precog_verifier/analysis.py` (about 100 lines).
+   The null interval is `d = (hits / N_trials - 0.2) * 100` plus or minus `1.96 * sqrt(0.16 / N_trials) * 100`, in
+   percentage points. The code is `src/precog_verifier/analysis.py` (about 200 lines).
 4. To reproduce `hits` for one batch from scratch, take its guesses and `target_round`, get that round from
    drand (`https://api.drand.sh/52db9ba70e0cc0f6eaf7803dd07447a1f5477735fd3f661792ba94600c84e971/public/<round>`),
    and follow section 3.6. The verifier does the same and verifies the BLS signature first.
@@ -450,8 +466,8 @@ published unchanged on OSF at the same time. The verifier implements the primary
 - Unit: one sealed batch of 25 guesses. H0: the pooled hit rate is 20%; H1 (two-sided): it differs from 20%.
 - `S = sum over counted batches of (hits - 0.2 * 25)`; `z = S / sqrt(N_trials * 0.2 * 0.8)`. This is valid
   however many batches people choose to play.
-- Counted: every sealed and anchored player batch from the registration date on, except exact repeats of a
-  batch ID (section 1). No exclusion for player behaviour, speed, device or result. No exclusion for a
+- Counted: every sealed and anchored player batch of the test `card5` from the registration date on, except exact
+  repeats of a batch ID (section 1). No exclusion for player behaviour, speed, device or result. No exclusion for a
   verification failure either: the whole release is withdrawn, the fault explained, and a corrected release
   issued.
 - Looks: quarterly data releases, up to 20 looks over 5 years. The threshold per look is
@@ -460,10 +476,11 @@ published unchanged on OSF at the same time. The verifier implements the primary
 
 Secondary analyses are reported next to the primary result and are never the headline. Per-participant capping
 and a Stouffer combination across participants are specified in SPEC section 9 and printed as `secondary`
-lines; they need participant numbers, so the release format has no such column until the participant data is
+lines (SPEC 9.10 also defines a second Stouffer statistic over each participant's first counted batch,
+`secondary stouffer_first`, and SPEC 9.6 the null interval on the `interval` line); they need participant numbers, so the release format has no such column until the participant data is
 released (`with_participants` in the manifest), and the output says `secondary.no_participants` until then.
 
-The **permutation control** is SPEC amendment 12 (approved 2026-10-11; the
+The **permutation control** is SPEC section 9.11 (the
 `precog/permutation/v1` tag is frozen). It takes the same counted batches as the primary result, orders
 them by anchor number and batch ID, and shuffles them with one published random shuffle in which no batch keeps
 its own place. The shuffle is seeded by the drand round that comes at least 24 hours after the latest anchor
@@ -479,13 +496,13 @@ release invalid. The control is withheld whenever the primary result is, and it 
 These are limits of the current code, found while writing this document. They are tracked and will be
 closed or documented in the specification. Do not assume a check exists for them.
 
-- Heads are required only up to `--as-of` (SPEC amendment 10). The newest head is not required to name the last anchor, and
-  the Bitcoin proofs of the heads are judged by SPEC amendment 15 (section 3.7).
+- Heads are required only up to `--as-of` (SPEC 10.1). The newest head is not required to name the last anchor, and
+  the Bitcoin proofs of the heads are judged by SPEC 11.4 (section 3.7).
 - `source` (`player` or `canary`) and `hits` are not in the leaf. `hits` is recomputed. `source` is checked only
-  for canary rows, whose guesses must be derived from a cron slot (SPEC amendment 9, approved 2026-10-10), so relabelling a
+  for canary rows, whose guesses must be derived from a cron slot (SPEC 9.7), so relabelling a
   player batch as canary is an error after registration. The beta canary rows sealed before registration used random
   guesses and appear as the warning `canary.unverified`. A receipt check does not compare `source`.
-  Amendment 17, approved by Ben 2026-10-16: player rows are also checked, and one that carries canary guesses is
+  Player rows are also checked (SPEC 9.8), and one that carries canary guesses is
   `canary.relabelled` (section 3.8).
 - `registration_ms` comes from the manifest, which the operator writes. The verifier prints
   `excluded pre_registration` so you can see the number, but it cannot tell whether the date is the registered one.
@@ -493,7 +510,7 @@ closed or documented in the specification. Do not assume a check exists for them
   tool does not compare the manifest with the expected production values (section 1, item 7).
 - Two authorities with different `id`s but the same operator count as two. The same `root_sha256` gives the warning
   `tsa.same_root`, but different roots do not prove different operators.
-- The Bitcoin proofs of the heads are checked as section 3.7 says (and a pending proof proves nothing yet); NIST pulses are cross-checked only online and only as warnings (SPEC amendment 16); offline they are recorded, not checked.
+- The Bitcoin proofs of the heads are checked as section 3.7 says (and a pending proof proves nothing yet); NIST pulses are cross-checked only online and only as warnings (SPEC 11.5); offline they are recorded, not checked.
 
 ## Reporting a problem
 
@@ -506,7 +523,7 @@ To report a suspected vulnerability privately, use the repository's **Security**
 
 ## Layout
 
-- `SPEC.md`: the public specification (v1). `vectors/`: frozen test vectors, generated by `tools/gen_vectors.py`.
+- `SPEC.md`: the public specification (version 1). `vectors/`: frozen test vectors, generated by `tools/gen_vectors.py`.
 - `src/precog_verifier/`: the verifier. `testing.py` builds synthetic releases for tests.
 - `src/precog_verifier/trust/`: the pinned root certificates. `tests/`: the test suite; `tests/data/`: fixtures.
 - `tools/`: `nightly_verify.py` (download and verify), `bench_bls.py`. The downloader it uses is the package module `precog_verifier/fetch_export.py` (with `tokenjoin.py`); `tools/fetch_export.py` and `tools/tokenjoin.py` only keep the old import names working.

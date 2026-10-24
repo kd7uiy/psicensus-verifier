@@ -1,4 +1,4 @@
-"""Amendment 15 in the release pipeline: loading `heads/*.ots` and `btc_headers.jsonl`, verify_release and the command line."""
+"""SPEC 11.4 in the release pipeline: loading `heads/*.ots` and `btc_headers.jsonl`, verify_release and the command line."""
 import json
 import shutil
 from pathlib import Path

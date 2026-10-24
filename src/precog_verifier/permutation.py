@@ -1,4 +1,4 @@
-"""Permutation control (SPEC amendment 12, approved 2026-10-11).
+"""Permutation control (SPEC 9.11).
 
 The counted batches of the primary analysis are ordered by (anchor_seq, batch_id bytes) and permuted by one
 seeded Sattolo derangement; batch k's guesses are scored against the targets of batch a[k] (their own round,

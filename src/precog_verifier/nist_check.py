@@ -1,4 +1,4 @@
-"""Check of the NIST beacon pulse recorded in each daily head (SPEC amendment 16, check 6d of section 11; DRAFT).
+"""Check of the NIST beacon pulse recorded in each daily head (SPEC 11.5, check 6d of section 11).
 
 Online only. For a head D whose `nist_pulse` is not `{null, null}` the pulse is fetched from its `uri`, but only when the
 `uri` is an address on the NIST beacon host (NIST_URI); any other value is `nist.foreign_uri` and nothing is requested.

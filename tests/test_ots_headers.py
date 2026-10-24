@@ -1,4 +1,4 @@
-"""Bitcoin block header acceptance (SPEC amendment 15): proof of work against the header's own target, a pinned work floor,
+"""Bitcoin block header acceptance (SPEC 11.4): proof of work against the header's own target, a pinned work floor,
 the header cache and the two public sources. The real headers are the three blocks of the repository vectors."""
 import http.server
 import threading

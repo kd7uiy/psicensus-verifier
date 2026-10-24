@@ -1,4 +1,4 @@
-"""Permutation control (SPEC amendment 12, approved 2026-10-11).
+"""Permutation control (SPEC 9.11).
 
 One seeded derangement (Sattolo) of the counted batches; each batch's guesses are scored against the
 targets of the batch the derangement assigns it. No network. The vectors are checked by an independent
@@ -692,3 +692,14 @@ def test_a_cut_of_zero_is_still_a_cut():
     bs = [make(1, i + 1, rng) for i in range(4)]
     c = run(bs, t_cut_s=0, getter=lambda r: RAND)
     assert c["status"] == "ok" and c["round"] == permutation.seed_round(0)
+
+
+def test_a_row_of_another_test_is_outside_the_permuted_set():
+    """SPEC 9.2 and 9.11 (R1): the control permutes the counted batches, and a row of another test is not counted."""
+    from dataclasses import replace
+
+    rng = random.Random(9)
+    good = [make(1, i + 1, rng, t=1000) for i in range(9)]
+    other = [replace(make(1, 100 + i, rng, t=1000), test_id="card6") for i in range(3)]
+    assert run(good + other, reg=1000) == run(good, reg=1000)
+    assert run(good + other, reg=1000)["n_batches"] == 9

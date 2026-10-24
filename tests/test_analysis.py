@@ -68,3 +68,23 @@ def test_as_dict_keys():
     for k in ("n_batches", "N_trials", "hits", "rate", "S", "z", "withheld", "duplicate_later",
               "duplicate_same_anchor", "excluded_pre_registration", "n_canary", "canary"):
         assert k in d
+
+
+def test_canary_set_starts_at_registration_and_counts_first_copies_of_card5():
+    """SPEC 9.9 (R2): `seen` is every canary row; the statistics use the rows from registration on."""
+    batches = [
+        ScoredBatch("canary", 999, 25, None), ScoredBatch("canary", 1000, 9, None), ScoredBatch("canary", 1001, 25, "later"),
+        ScoredBatch("canary", 1002, 25, "same_anchor"), ScoredBatch("canary", 1003, 25, None, test_id="card6"),
+    ]
+    a = analyze(batches, registration_ms=1000)
+    assert a.n_canary == 5 and a.canary["n_batches"] == 1 and a.canary["hits"] == 9 and a.canary["S"] == 4
+
+
+def test_other_test_is_excluded_and_counted_apart():
+    a = analyze([B(hits=7), ScoredBatch("player", 1000, 25, None, test_id="card6")], registration_ms=1000)
+    assert (a.n_batches, a.hits, a.excluded_other_test) == (1, 7, 1)
+
+
+def test_as_dict_keys_of_amendment_18():
+    d = analyze([B()], 0).as_dict()
+    assert d["excluded_other_test"] == 0 and set(d["interval_pp"]) == {"low", "high"}

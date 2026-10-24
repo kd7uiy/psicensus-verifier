@@ -9,7 +9,7 @@ from . import anchor as anchor_mod
 import time
 
 from . import beacon, canary, formats, leaf, merkle, nist_check, ots_check, permutation, score, targets, tsa
-from .analysis import Analysis, ScoredBatch, analyze
+from .analysis import Analysis, ScoredBatch, analyze, cut_ms, look_number
 from .encoding import from_hex
 from .errors import VerifyError
 from .ots import MAX_OTS_BYTES
@@ -22,7 +22,7 @@ class ReleaseData:
     anchors: list = field(default_factory=list)
     rounds: list = field(default_factory=list)
     heads: dict = field(default_factory=dict)  # file stem -> raw dict
-    ots: dict = field(default_factory=dict)  # date -> raw bytes of heads/<date>.ots (SPEC amendment 15); at most MAX_OTS_BYTES + 1 bytes each
+    ots: dict = field(default_factory=dict)  # date -> raw bytes of heads/<date>.ots (SPEC 11.4); at most MAX_OTS_BYTES + 1 bytes each
     btc_headers: list = field(default_factory=list)  # parsed lines of btc_headers.jsonl: a cache, never authoritative
     load_errors: list = field(default_factory=list)
 
@@ -33,9 +33,10 @@ class Result:
     warnings: list
     analysis: Analysis | None
     release_id: str | None = None
-    registration_ms: int | None = None  # the manifest's value, once the manifest parsed (SPEC amendment 14, approved 2026-10-11)
-    ots: dict | None = None  # counts for the proofs of the heads: confirmed, pending, unchecked, late, missing (SPEC amendment 15)
-    nist: dict | None = None  # counts for the NIST pulses of the heads, None when the check did not run (SPEC amendment 16, draft)
+    registration_ms: int | None = None  # the manifest's value, once the manifest parsed (SPEC 11.3)
+    ots: dict | None = None  # counts for the proofs of the heads: confirmed, pending, unchecked, late, missing (SPEC 11.4)
+    nist: dict | None = None  # counts for the NIST pulses of the heads, None when the check did not run (SPEC 11.5)
+    look: dict | None = None  # {"j", "cut_ms"} for a `YYYY-Qn` release_id, otherwise None (SPEC 9.12, R5)
 
     @property
     def ok(self) -> bool:
@@ -45,7 +46,7 @@ class Result:
 # ------------------------------------------------------------------ as_of
 DAY_MS = 86_400_000
 MAX_REGISTRATION_MS = 10**15  # --registration-ms takes at most 15 digits, like --as-of
-HEAD_GRACE_MS = 3_600_000  # SPEC amendment 10: day D is required once as_of >= 00:00 UTC of D+1 plus one hour
+HEAD_GRACE_MS = 3_600_000  # SPEC 10.1: day D is required once as_of >= 00:00 UTC of D+1 plus one hour
 MAX_MISSING_LISTED = 20
 _DATE_STEM = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}")
 _ISO_UTC = re.compile(r"([0-9]{4}-[0-9]{2}-[0-9]{2})T([0-9]{2}:[0-9]{2}:[0-9]{2})(?:\.([0-9]{1,9}))?Z")
@@ -138,7 +139,7 @@ def load_release(directory: str | Path) -> ReleaseData:
                 try:
                     cache.append(json.loads(line))
                 except ValueError:
-                    pass  # a cache: a damaged line is skipped, never an error (SPEC amendment 15)
+                    pass  # a cache: a damaged line is skipped, never an error (SPEC 11.4)
     data = ReleaseData(
         manifest=manifest,
         batches=_read_jsonl(d / "batches.jsonl", errs),
@@ -179,7 +180,7 @@ def duplicate_locations(rows) -> dict:
 
 
 def duplicate_status(locs: list) -> dict:
-    """Amendment 4: classify each (anchor_seq, leaf_index) copy of one batch_id.
+    """SPEC 9.1 and 9.5: classify each (anchor_seq, leaf_index) copy of one batch_id.
 
     Returns {location: None | "later" | "same_anchor"}. The copy in the earliest anchor is the
     batch if it is alone there; if several copies share the earliest anchor, all of them are
@@ -242,19 +243,19 @@ def verify_release(
     header_sources=None,
     nist_fetch=None,
 ) -> Result:
-    """`as_of_ms` (SPEC amendment 10): the time the release is judged at; None skips the head-completeness check.
+    """`as_of_ms` (SPEC 10.1): the time the release is judged at; None skips the head-completeness check.
     The CLI always supplies it.
 
-    SPEC amendment 13 (approved 2026-10-11): a manifest with mock authorities or a mock beacon gets a warning each
+    SPEC 11.2: a manifest with mock authorities or a mock beacon gets a warning each
     (`manifest.mock_authority`, `manifest.mock_beacon`); with `require_production` they are errors instead.
 
-    SPEC amendment 14 (approved 2026-10-11): `registration_ms`, when given (an integer, 0 <= value < 10**15, otherwise ValueError), must
+    SPEC 11.3: `registration_ms`, when given (an integer, 0 <= value < 10**15, otherwise ValueError), must
     equal the manifest's value, or the release gets the error `manifest.registration_mismatch`.
 
-    SPEC amendment 15: the `.ots` proofs of the heads are checked (ots_check.py). `header_sources` is a list of two functions
+    SPEC 11.4: the `.ots` proofs of the heads are checked (ots_check.py). `header_sources` is a list of two functions
     height -> 80 header bytes or None, asked in order unless `offline` (None: the two public explorers of btc.py); tests inject their own.
 
-    SPEC amendment 16 (draft): unless `offline`, the NIST pulse of each head is fetched and compared (nist_check.py), warnings only.
+    SPEC 11.5: unless `offline`, the NIST pulse of each head is fetched and compared (nist_check.py), warnings only.
     A release whose manifest names the mock beacon is not checked unless `nist_fetch` (a function uri -> (status, body)) is given; tests inject it."""
     if registration_ms is not None and (type(registration_ms) is not int or not 0 <= registration_ms < MAX_REGISTRATION_MS):
         raise ValueError("registration_ms must be an integer of at most 15 digits")
@@ -412,6 +413,18 @@ def verify_release(
                 warnings.append(VerifyError("anchor.time_regressed", seq, None, "token time is earlier than the previous anchor's"))
             prev_t = t
 
+    # ---- check 3b (SPEC 9.12, R5): for a `YYYY-Qn` release no anchor is later than the cut of that quarter.
+    # t_anchor is the later token time rounded up to the second (as in section 7); it is taken from the valid tokens.
+    look = None
+    cut = cut_ms(manifest.release_id)
+    if cut is not None:
+        look = {"j": look_number(manifest.registration_ms, manifest.release_id), "cut_ms": cut}
+        for seq in sorted(token_times):
+            if token_times[seq]:
+                t_anchor_ms = beacon.t_anchor_seconds(token_times[seq]) * 1000
+                if t_anchor_ms > cut:
+                    errs.append(VerifyError("look.after_cut", seq, None, f"t_anchor_ms={t_anchor_ms}; cut_ms={cut}"))
+
     # ---- check 5: target round
     for seq, a in by_seq.items():
         if not token_ok[seq]:
@@ -462,7 +475,7 @@ def verify_release(
         if h != r.hits:
             errs.append(VerifyError("score.mismatch", r.anchor_seq, r.batch_id, f"recomputed hits {h}, published {r.hits}"))
 
-    # ---- check 6b: canary guesses (SPEC amendment 9): a canary row must carry the guesses derived from its slot
+    # ---- check 6b: canary guesses (SPEC 9.7): a canary row must carry the guesses derived from its slot
     unverified = 0
     for r in rows:
         if r.source != "canary" or canary.row_matches(r.guesses, r.test_id, r.sealed_at_ms):
@@ -474,20 +487,20 @@ def verify_release(
     if unverified:
         warnings.append(VerifyError("canary.unverified", None, None, f"count={unverified}; canary rows sealed before registration whose guesses are not derived"))
 
-    # ---- check 6c: OpenTimestamps proofs of the heads (SPEC amendment 15); only ots.invalid is an error
+    # ---- check 6c: OpenTimestamps proofs of the heads (SPEC 11.4); only ots.invalid is an error
     ots_report = ots_check.check_ots(heads, data.ots, data.btc_headers, as_of_ms, offline, header_sources)
     errs.extend(ots_report.errors)
     warnings.extend(ots_report.warnings)
 
-    # ---- check 6d: NIST pulses of the heads (SPEC amendment 16, draft); online only, warnings only
+    # ---- check 6d: NIST pulses of the heads (SPEC 11.5); online only, warnings only
     nist_counts = None
     if not offline and (nist_fetch is not None or manifest.network != MOCK_BEACON_NETWORK):
         nist_report = nist_check.check_nist(heads, fetch=nist_fetch)
         warnings.extend(nist_report.warnings)
         nist_counts = nist_report.counts
 
-    # ---- check 6e: Amendment 17, approved by Ben 2026-10-16. A player row that carries the canary guesses of a candidate
-    # slot of its own sealed_at_ms (amendment 9's window) is a relabelled canary batch: an error from registration_ms
+    # ---- check 6e (SPEC 9.8): a player row that carries the canary guesses of a candidate
+    # slot of its own sealed_at_ms (the window of SPEC 9.7) is a relabelled canary batch: an error from registration_ms
     # on (one per row), a warning with the count before it. Nothing is excluded because of it (SPEC section 9).
     relabelled_beta = 0
     for r in rows:
@@ -516,13 +529,17 @@ def verify_release(
     scored = [
         ScoredBatch(
             r.source, r.sealed_at_ms, hits_by_row.get(id(r), r.hits), status.get(id(r)), r.anchor_seq, r.batch_id_b, r.participant,
-            r.guesses, targets_by_row.get(id(r), ()),
+            r.guesses, targets_by_row.get(id(r), ()), r.test_id,
         )
         for r in rows
     ]
     analysis = analyze(scored, manifest.registration_ms, withheld, manifest.with_participants)
+    if analysis.excluded_other_test:  # SPEC 9.2 (R1): excluded, never an error, once per release
+        warnings.append(
+            VerifyError("batch.other_test_id", None, None, f"count={analysis.excluded_other_test}; player rows of another test, not counted")
+        )
 
-    # ---- permutation control (SPEC amendment 12, approved 2026-10-11): secondary, a notice when it cannot be computed, never an error
+    # ---- permutation control (SPEC 9.11): secondary, a notice when it cannot be computed, never an error
     def seed_randomness(rnd: int) -> bytes | None:
         cached = round_sigs.get(rnd)
         if cached is not None and _check_cached_rounds(bcn, [(rnd, cached)]).get(rnd):
@@ -544,4 +561,4 @@ def verify_release(
         as_of_ms if as_of_ms is not None else time.time_ns() // 1_000_000,
         seed_randomness,
     )
-    return Result(errs, warnings, analysis, manifest.release_id, manifest.registration_ms, ots_report.counts, nist_counts)
+    return Result(errs, warnings, analysis, manifest.release_id, manifest.registration_ms, ots_report.counts, nist_counts, look)

@@ -4,7 +4,7 @@ This is the structural layer, in parity with the operator's Worker (shared vecto
 tests/data/rfc3161/structural.json). It does not check any signature; cms.py and chain.py do.
 
 genTime: GeneralizedTime `YYYYMMDDHHMMSS[.f+]Z`, a real calendar time from 1970 on. Fractional digits
-beyond milliseconds are truncated, not rounded (matches tokencheck.ts; SPEC section 6, amendment 7).
+beyond milliseconds are truncated, not rounded (matches tokencheck.ts; SPEC section 6).
 A leap second (":60") has no Unix millisecond and is refused.
 """
 import calendar

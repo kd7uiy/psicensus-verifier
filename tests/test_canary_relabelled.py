@@ -1,8 +1,8 @@
-"""Amendment 17, approved by Ben 2026-10-16: a relabelled canary batch is an error.
+"""SPEC 9.8: a relabelled canary batch is an error.
 
-`source` is not in the leaf (SPEC section 6), so after its targets exist a canary batch could be published as
-`source == "player"` and be counted. A `player` row whose guesses equal derive(m) (SPEC amendment 9) for a
-candidate slot m of its own sealed_at_ms (the same window as amendment 9: every whole minute m >= 0 with
+`source` is not in the leaf (SPEC section 3), so after its targets exist a canary batch could be published as
+`source == "player"` and be counted. A `player` row whose guesses equal derive(m) (SPEC 9.7) for a
+candidate slot m of its own sealed_at_ms (the same window as SPEC 9.7: every whole minute m >= 0 with
 sealed_at_ms - 600000 <= m <= sealed_at_ms), with test_id card5, gives:
 - canary.relabelled, an ERROR, one per row, when sealed_at_ms >= registration_ms (S and z are withheld);
 - canary.relabelled, a WARNING, once per release with count=N, when sealed_at_ms < registration_ms.
@@ -27,7 +27,7 @@ def codes(items):
 
 
 def reseal(data):
-    """Amendment 17, approved by Ben 2026-10-16. Test helper: after guesses or sealed times were changed, recompute every
+    """SPEC 9.8. Test helper: after guesses or sealed times were changed, recompute every
     leaf, hit count, root and anchor hash, relink the chain, re-issue the mock tokens at their old times (so the target
     rounds stay) and move the daily heads to the new hashes. The result is a consistent release."""
     prev = anchor_mod.ZERO_HASH
@@ -211,11 +211,11 @@ def test_a_canary_relabelled_player_after_registration_is_an_error(sample):
 
 
 def test_without_the_relabelling_the_same_release_is_valid(sample):
-    assert verify_release(sample).ok  # the canary row as published: amendment 9 passes it, amendment 17 does not see it
+    assert verify_release(sample).ok  # the canary row as published: the rule of SPEC 9.7 passes it, the rule of SPEC 9.8 does not see it
 
 
 def test_a_canary_row_is_never_checked_by_this_rule():
-    data = testing.build_sample_release(canary_lag_minutes=11)  # a canary row that fails amendment 9
+    data = testing.build_sample_release(canary_lag_minutes=11)  # a canary row that fails the rule of SPEC 9.7
     res = verify_release(data)
     assert "canary.guesses_mismatch" in codes(res.errors)
     assert CODE not in codes(res.errors) and CODE not in codes(res.warnings)
@@ -318,7 +318,7 @@ def test_registered_and_beta_matches_split_by_sealed_time(sample):
 def test_a_later_duplicate_copy_is_checked_too(sample):
     """Every player row is checked, whatever its duplicate status (no row is excused by a rule that could be
     arranged after the targets exist)."""
-    first = canary_row(sample)  # stays a canary row: amendment 9 passes it
+    first = canary_row(sample)  # stays a canary row: the rule of SPEC 9.7 passes it
     last_seq = max(a["anchor_seq"] for a in sample.anchors)
     later_rows = testing.rows_of(sample, last_seq)
     copy_row = dict(first, source="player", anchor_seq=last_seq, leaf_index=len(later_rows), target_round=later_rows[0]["target_round"])

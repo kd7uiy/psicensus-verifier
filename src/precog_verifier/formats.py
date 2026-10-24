@@ -6,7 +6,7 @@ from .encoding import from_hex, is_slug, parse_guesses
 MANIFEST_FORMAT = "precog-release/v1"
 RECEIPT_FORMAT = "precog-receipt/v1"
 SOURCES = ("player", "canary")
-PARTICIPANT_LIMIT = 2**53  # SPEC 10.1, amendment 11
+PARTICIPANT_LIMIT = 2**53  # SPEC 10.1, participant numbers
 
 
 class FormatError(ValueError):
@@ -39,7 +39,7 @@ def _hex(d: dict, key: str, nbytes: int) -> bytes:
         raise FormatError(f"{key}: {e}") from None
 
 
-CA_FIELDS = ("issuing_ca_sha256", "root_sha256", "cert_sha256")  # cert_sha256: replaced by amendment 6
+CA_FIELDS = ("issuing_ca_sha256", "root_sha256", "cert_sha256")  # cert_sha256: not a valid field (SPEC 10.2)
 _HEX64 = set("0123456789abcdef")
 
 
@@ -48,17 +48,17 @@ def _is_hash(v: object) -> bool:
 
 
 def check_authority_entry(a: object, where: str) -> None:
-    """Validate the CA fields of one authority entry (SPEC 10.1 / 10.2, amendment 6).
+    """Validate the CA fields of one authority entry (SPEC 10.1 / 10.2, certificate pinning fields).
 
     where == "manifest": issuing_ca_sha256 is a non-empty list of distinct hashes.
     where == "receipt":  issuing_ca_sha256 is a single hash string (the CA that signed the token).
     rfc3161 entries need issuing_ca_sha256 and root_sha256 (a hash string); mock-hmac entries carry none
-    of the CA fields; other kinds are not checked here. cert_sha256 (amendment 5) is no longer valid.
+    of the CA fields; other kinds are not checked here. cert_sha256 is not a valid field.
     """
     if not isinstance(a, dict) or not is_slug(a.get("id")) or not isinstance(a.get("kind"), str):
         raise FormatError("authority entry needs a slug id and a string kind")
     if "cert_sha256" in a:
-        raise FormatError("cert_sha256 is replaced by issuing_ca_sha256 (SPEC amendment 6)")
+        raise FormatError("cert_sha256 is replaced by issuing_ca_sha256 (SPEC 10.2)")
     kind = a["kind"]
     if kind == "mock-hmac":
         present = [k for k in CA_FIELDS if k in a]

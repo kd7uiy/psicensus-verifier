@@ -1,4 +1,4 @@
-"""Strict reader of OpenTimestamps `.ots` proofs (SPEC amendment 15).
+"""Strict reader of OpenTimestamps `.ots` proofs (SPEC 11.4).
 
 Only what the check needs is understood: the magic and version 1, the file hash op sha256, a 32 byte digest, and a tree
 whose operations are sha256, append and prepend (nothing else), ending in attestations of the kinds pending, bitcoin or

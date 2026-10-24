@@ -1,4 +1,4 @@
-"""The downloader writes btc_headers.jsonl (SPEC amendment 15): the Bitcoin headers that the downloaded .ots proofs need, each
+"""The downloader writes btc_headers.jsonl (SPEC 11.4): the Bitcoin headers that the downloaded .ots proofs need, each
 fetched once from the first source (second as a fallback), only acceptable ones, best effort. No network: sources are injected."""
 import base64
 import json

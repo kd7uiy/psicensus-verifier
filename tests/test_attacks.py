@@ -15,7 +15,7 @@ SAMPLE_DIR = Path(__file__).parent / "data" / "sample_release"
 
 
 def codes(data):
-    """Error codes of a tampered release. Also enforces amendment 4: an invalid release withholds
+    """Error codes of a tampered release. Also enforces SPEC 9.1 and 9.3: an invalid release withholds
     S and z, and no verification failure changes any exclusion count."""
     res = verify_release(data)
     c = {e.code for e in res.errors}
@@ -262,7 +262,7 @@ def test_receipt_with_wrong_authority_name(sample):
     assert [e.code for e in verify_receipt(rc, sample)] == ["receipt.authority_mismatch"]
 
 
-# ------------------------------------- amendment 6: issuing CA array vs string
+# ------------------------------------- SPEC 10.2: issuing CA array vs string
 CA1, CA2, CA3 = "a1" * 32, "b2" * 32, "c3" * 32
 ROOT = "d4" * 32
 
@@ -376,7 +376,7 @@ def test_receipt_authorities_do_not_match_release(sample):
 
 
 
-# ------------------------------------------------- amendment 4: bias channels
+# ------------------------------------------------- SPEC 9.1: bias channels
 def relink(sample, seq):
     """Rebuild anchor `seq` and every later anchor, re-issuing tokens with their original times."""
     for a in sample.anchors:

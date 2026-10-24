@@ -111,7 +111,7 @@ def make_receipt(data: ReleaseData, batch_id: str, anchor_seq: int | None = None
 def build_sample_release(seed: int = 20261003, canary_lag_minutes: int = 0, canary_test_id: str = "card5") -> ReleaseData:
     """Valid release: 5 anchors with 1,2,3,5,3 leaves; one canary; one pre-registration batch;
     two mock authorities; daily heads for two UTC days. The canary row carries the guesses derived from the
-    whole minute `canary_lag_minutes` before its sealed minute (SPEC amendment 9); a lag over 10 or another
+    whole minute `canary_lag_minutes` before its sealed minute (SPEC 9.7); a lag over 10 or another
     test id makes it fail the canary rule."""
     rng = random.Random(seed)
     data = ReleaseData(manifest=manifest())
@@ -188,7 +188,7 @@ MOCK_NOTICES = ("manifest.mock_authority", "manifest.mock_beacon")
 
 
 def real_warnings(res) -> list:
-    """The warnings of `res` without the mock notices every synthetic release carries (SPEC amendment 13, approved 2026-10-11)."""
+    """The warnings of `res` without the mock notices every synthetic release carries (SPEC 11.2)."""
     return [w for w in res.warnings if w.code not in MOCK_NOTICES]
 
 

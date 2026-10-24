@@ -55,10 +55,12 @@ def _print_secondary(sec: dict) -> None:
         f"hits={c['hits']} rate={_num(c['rate'])} S={c['S']} z={_num(c['z'])}"
     )
     print(f"secondary stouffer k={st['k']} Z={_num(st['Z'])}")
+    sf = sec["stouffer_first"]  # SPEC 9.10, first-batch Stouffer (R3 a); k is shared with the line above
+    print(f"secondary stouffer_first k={sf['k']} Z={_num(sf['Z'])}")
 
 
 def _print_permutation(p: dict) -> None:
-    """Amendment 12 (approved 2026-10-11). The round is omitted when it was not computed."""
+    """SPEC 9.11, permutation control. The round is omitted when it was not computed."""
     rnd = f" round={p['round']}" if p.get("round") is not None else ""
     if p["status"] == "unavailable":
         print(f"permutation unavailable code={p['code']}{rnd}")
@@ -81,11 +83,13 @@ def cmd_verify_release(path: str, offline: bool = False, as_of_ms: int | None = 
     res = verify_release(load_release(d), offline=offline, as_of_ms=as_of_ms, require_production=require_production, registration_ms=registration_ms)
     print("result " + ("OK" if res.ok else "FAIL"))
     print(f"as_of_ms {as_of_ms}")
-    if res.registration_ms is not None:  # amendment 14: say where the number that decides the pre-registration cut came from
+    if res.registration_ms is not None:  # SPEC 11.3: say where the number that decides the pre-registration cut came from
         from_option = registration_ms is not None and registration_ms == res.registration_ms
         print(f"registration_ms {res.registration_ms} source={'option' if from_option else 'manifest'}")
     if res.release_id is not None:
         print(f"release_id {res.release_id}")
+    if res.look is not None:  # SPEC 9.12, the look (R5): only for a YYYY-Qn release
+        print(f"look j={res.look['j']} cut_ms={res.look['cut_ms']}")
     a = res.analysis
     if a is not None:
         if a.withheld:
@@ -97,8 +101,13 @@ def cmd_verify_release(path: str, offline: bool = False, as_of_ms: int | None = 
             )
         print(
             f"excluded pre_registration={a.excluded_pre_registration} "
-            f"duplicate_later={a.duplicate_later} duplicate_same_anchor={a.duplicate_same_anchor}"
+            f"duplicate_later={a.duplicate_later} duplicate_same_anchor={a.duplicate_same_anchor} other_test={a.excluded_other_test}"
         )
+        if a.withheld:  # SPEC 9.6, the null interval (R4)
+            print("interval withheld")
+        else:
+            iv = a.interval_pp
+            print(f"interval pp_low={_num(iv and iv['low'])} pp_high={_num(iv and iv['high'])}")
         c = a.canary
         if a.withheld:
             print(f"canary seen={a.n_canary} n_batches={c['n_batches']} N_trials={c['N_trials']} withheld")
@@ -109,9 +118,9 @@ def cmd_verify_release(path: str, offline: bool = False, as_of_ms: int | None = 
             )
         _print_secondary(a.secondary)
         _print_permutation(a.permutation)
-    if res.ots is not None:  # amendment 15
+    if res.ots is not None:  # SPEC 11.4
         print("ots " + " ".join(f"{k}={res.ots[k]}" for k in ("confirmed", "pending", "unchecked", "late", "missing")))
-    if res.nist is not None:  # amendment 16 (draft)
+    if res.nist is not None:  # SPEC 11.5
         print("nist " + " ".join(f"{k}={res.nist[k]}" for k in nist_check.COUNT_KEYS))
     _print_list("warning", res.warnings)
     _print_list("error", res.errors)

@@ -1,4 +1,4 @@
-"""The nightly requires production values on a live run (--require-production of the verifier, SPEC amendment 13):
+"""The nightly requires production values on a live run (--require-production of the verifier, SPEC 11.2):
 a mock authority or a mock beacon in the published manifest is an integrity alert with the verifier's own codes."""
 import subprocess
 import sys

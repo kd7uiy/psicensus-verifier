@@ -2,7 +2,7 @@
 
 The tools are not part of the verifier. They download the published export, run the public verifier
 exactly as a user would, and write a report. A failed verification is an INTEGRITY ALERT, never an
-exclusion (SPEC amendment 4). The real quicknet and rfc3161 plugins do not exist yet, so everything
+exclusion (SPEC 9.1, 9.3). The real quicknet and rfc3161 plugins do not exist yet, so everything
 here uses the mock sample release.
 """
 import hashlib
@@ -60,7 +60,7 @@ def run_cli(tmp_path, *args, name="r", strict=False):
     report = tmp_path / f"{name}.json"
     summary = tmp_path / f"{name}.md"
     if "--release-dir" in args and "--as-of" not in args:
-        args = (*args, "--as-of", "2023-11-17T00:00:00Z")  # fixtures are old: pin the judging time (SPEC amendment 10)
+        args = (*args, "--as-of", "2023-11-17T00:00:00Z")  # fixtures are old: pin the judging time (SPEC 10.1)
     rc = nv.main([*args, "--report", str(report), "--summary", str(summary)])
     rep = json.loads(report.read_text()) if report.exists() else None
     return rc, rep, (summary.read_text() if summary.exists() else None)
@@ -423,7 +423,7 @@ def test_tampered_release_is_an_integrity_alert(tmp_path, name, mutate, codes):
 
 def test_tail_truncation_without_heads_is_head_missing_and_warned(tmp_path):
     """The tail-truncation attack through the nightly: last anchor and heads/ deleted. The verifier now reports head.missing
-    (SPEC amendment 10), and the release.no_heads warning stays."""
+    (SPEC 10.1), and the release.no_heads warning stays."""
     d = tampered(tmp_path, "tail", _drop_last_anchor_keep_heads)
     shutil.rmtree(d / "heads")
     rc, rep, summary = run_cli(tmp_path, "--release-dir", str(d))
@@ -1185,7 +1185,7 @@ def test_ots_error_is_only_a_warning(tmp_path, serve, monkeypatch):
 
 
 def test_live_run_passes_its_download_start_time_as_as_of(tmp_path, serve, monkeypatch):
-    """The nightly judges a download at the time it started (SPEC amendment 10): the clock decides which heads are due."""
+    """The nightly judges a download at the time it started (SPEC 10.1): the clock decides which heads are due."""
     seen = []
     real = nv.run_verifier
     monkeypatch.setattr(nv, "run_verifier", lambda d, t, as_of=None, rp=False: (seen.append(as_of), real(d, t, as_of, rp))[1])

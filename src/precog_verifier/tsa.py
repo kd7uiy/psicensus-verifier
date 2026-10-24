@@ -109,7 +109,7 @@ def extra_trust_dirs(dirs):
 
 
 def root_hashes(tokens: list[dict], authorities: dict[str, dict]) -> set[str]:
-    """The distinct `root_sha256` values pinned by the authorities of `tokens` (SPEC amendment 13, approved 2026-10-11).
+    """The distinct `root_sha256` values pinned by the authorities of `tokens` (SPEC 11.2).
 
     Call it for an anchor whose tokens all verified. An authority without a `root_sha256` (a mock) adds none."""
     roots = set()

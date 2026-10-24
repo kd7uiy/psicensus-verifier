@@ -1,4 +1,4 @@
-"""Secondary analyses (SPEC section 9, approved by Ben 2026-10-10): per-participant capping and Stouffer. No network."""
+"""Secondary analyses (SPEC 9.10): per-participant capping and Stouffer. No network."""
 import json
 import math
 import random
@@ -260,7 +260,7 @@ def test_not_withheld_reports_status_ok():
 
 def test_not_available_without_participant_numbers():
     a = run([B(None), B(None, b=2)], with_participants=False)
-    assert a.secondary == {"status": "unavailable", "code": NO_CODE, "capped": None, "stouffer": None}
+    assert a.secondary == {"status": "unavailable", "code": NO_CODE, "capped": None, "stouffer": None, "stouffer_first": None}
     assert a.n_batches == 2 and a.z is not None  # the primary is unaffected
 
 
@@ -358,6 +358,7 @@ def test_secondary_lines_exact_with_nonzero_values(capsys):
     assert out == [
         f"secondary capped n_batches=23 N_trials=575 removed=1 hits=138 rate={138 / 575:.6f} S=23 z={c['z']:.6f}",
         f"secondary stouffer k=3 Z={st['Z']:.6f}",
+        f"secondary stouffer_first k=3 Z={a.secondary['stouffer_first']['Z']:.6f}",  # SPEC 9.10, first-batch Stouffer
     ]
     assert c["z"] > 0 and st["Z"] > 0
     _print_secondary(run(rows, withheld=True).secondary)
@@ -414,3 +415,12 @@ def test_release_rows_keep_participant_through_write_and_load(tmp_path, sample):
     write_release(with_participants(sample), d)
     assert load_release(d).manifest["with_participants"] is True
     assert json.loads((d / "batches.jsonl").read_text().splitlines()[0])["participant"] == 0
+
+
+def test_stouffer_first_in_each_state():
+    """SPEC 9.10 (R3): the first-batch variant is present exactly when the existing Stouffer is."""
+    rows = [B("p", b=1, hits=9), B("q", b=2, hits=1)]
+    assert run(rows).secondary["stouffer_first"]["k"] == 2
+    assert run(rows, withheld=True).secondary["stouffer_first"] == {"k": 2, "Z": None, "S": None}
+    assert run(rows, with_participants=False).secondary["stouffer_first"] is None
+    assert run(rows + [B(None, b=3)]).secondary["stouffer_first"] is None

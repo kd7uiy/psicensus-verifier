@@ -1,4 +1,4 @@
-"""SPEC amendment 14 (approved 2026-10-11): --registration-ms, the registration time as published with the pre-registration."""
+"""SPEC 11.3: --registration-ms, the registration time as published with the pre-registration."""
 import pytest
 
 from precog_verifier import testing

@@ -1,4 +1,4 @@
-"""The OpenTimestamps check of the daily heads (SPEC amendment 15): outcomes, sources, time and missing proofs.
+"""The OpenTimestamps check of the daily heads (SPEC 11.4): outcomes, sources, time and missing proofs.
 
 Real proofs and real block headers (tests/data/ots_v1); the header sources are injected, so nothing here uses the network."""
 import datetime

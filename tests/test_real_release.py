@@ -78,7 +78,7 @@ def test_verifying_online_with_a_complete_cache_makes_no_request(real):
         res = verify_release(real)
     finally:
         beacon.register_beacon("drand-quicknet", old)
-    # No request for any round the release needs. The permutation control (amendment 12, approved 2026-10-11) is the one allowed
+    # No request for any round the release needs. The permutation control (SPEC 9.11) is the one allowed
     # reader of the network: its seed round is a day after the latest anchor, so it is never in the cache.
     from precog_verifier import permutation
 

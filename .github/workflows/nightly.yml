@@ -12,7 +12,7 @@ name: nightly
 # so every run saves a new entry and the newest earlier one is restored (restore-keys). A miss, a damaged file or a forged line
 # changes nothing: the downloader drops what it cannot use, and the verifier re-checks every header and every proof itself.
 # A cached proof or header is never a reason to accept or to reject anything; an invalid proof is reported only under the
-# verifier's own rule, after the public explorers have been asked (SPEC amendment 15). The proof cache does a full download at
+# verifier's own rule, after the public explorers have been asked (SPEC 11.4). The proof cache does a full download at
 # least every 7 days.
 #
 # Politeness: the downloader sends at most 5 requests per second (about 10 requests for a whole download today, fewer with the

@@ -1,4 +1,4 @@
-"""Check of the OpenTimestamps proofs of the daily heads (SPEC amendment 15, check 6c of section 11).
+"""Check of the OpenTimestamps proofs of the daily heads (SPEC 11.4, check 6c of section 11).
 
 Per head D with a `heads/D.ots`: the file must parse strictly (ots.py) and stamp the head's `anchor_hash`. Each Bitcoin
 attestation is then compared with an *acceptable* block header for its height (btc.py): first the release's

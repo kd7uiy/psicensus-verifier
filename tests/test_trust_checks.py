@@ -1,4 +1,4 @@
-"""SPEC amendment 13 (approved 2026-10-11): mock authority and mock beacon notices, --require-production, tsa.same_root."""
+"""SPEC 11.2: mock authority and mock beacon notices, --require-production, tsa.same_root."""
 from pathlib import Path
 
 import pytest

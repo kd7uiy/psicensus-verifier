@@ -1,4 +1,4 @@
-"""Canary guesses (SPEC amendment 9).
+"""Canary guesses (SPEC 9.7).
 
 A canary batch's guesses are derived from public data fixed before its target exists: the slot, the
 Cron Trigger's scheduled time in Unix milliseconds (a whole minute). Same construction as the targets
@@ -27,14 +27,14 @@ def candidate_slots(sealed_at_ms: int) -> range:
 
 
 def row_matches(guesses: str, test_id: str, sealed_at_ms: int) -> bool:
-    """The amendment 9 rule for one canary row."""
+    """The rule of SPEC 9.7 for one canary row."""
     if test_id != CANARY_TEST_ID:
         return False
     return any(derive_guesses(m) == guesses for m in candidate_slots(sealed_at_ms))
 
 
 def _slot_matches(guesses: str, slot_ms: int) -> bool:
-    """Amendment 17, approved by Ben 2026-10-16. guesses == derive_guesses(slot_ms), compared digit by digit and stopping at
+    """SPEC 9.8. guesses == derive_guesses(slot_ms), compared digit by digit and stopping at
     the first difference: the same answer as the full derivation, about 1.25 hashes per slot for a random row."""
     if len(guesses) != GUESS_COUNT:
         return False
@@ -46,7 +46,7 @@ def _slot_matches(guesses: str, slot_ms: int) -> bool:
 
 
 def matching_slot(guesses: str, test_id: str, sealed_at_ms: int) -> int | None:
-    """Amendment 17, approved by Ben 2026-10-16. The lowest candidate slot of amendment 9's window (candidate_slots) whose
+    """SPEC 9.8. The lowest candidate slot of the window of SPEC 9.7 (candidate_slots) whose
     canary guesses equal `guesses`, or None; None for any test_id other than card5. Used on player rows: a match means
     the row carries a canary batch's guesses. At most 11 slots of at most 25 hashes each."""
     if test_id != CANARY_TEST_ID:

@@ -79,3 +79,11 @@ def test_usage_errors(tmp_path, capsys):
 def test_empty_directory_fails_cleanly(tmp_path, capsys):
     assert main(["verify-release", str(tmp_path)]) == 1
     assert "format.invalid" in capsys.readouterr().out
+
+
+def test_new_lines_of_amendment_18(capsys):
+    assert main(["verify-release", str(SAMPLE), "--offline", "--as-of", "2023-11-17T00:00:00Z"]) == 0
+    out = capsys.readouterr().out.splitlines()
+    i = next(n for n, ln in enumerate(out) if ln.startswith("excluded "))
+    assert out[i].endswith("duplicate_same_anchor=0 other_test=0")
+    assert out[i + 1].startswith("interval pp_low=") and " pp_high=" in out[i + 1]

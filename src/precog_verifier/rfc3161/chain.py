@@ -2,7 +2,7 @@
 
 Path: signer -> issuing CA -> up to MAX_INTERMEDIATES intermediates (taken from the token) -> the pinned
 root (taken from the trust directory). Rules:
-- the CA that signed the signer certificate must be one of the pinned issuing-CA hashes (SPEC amendment 6);
+- the CA that signed the signer certificate must be one of the pinned issuing-CA hashes (SPEC 10.2);
 - the pinned root ends the path. Certificates in the token that carry the root's name (cross-signed copies)
   are never used to extend the path;
 - EVERY certificate in the path, the root included, must be valid at genTime (both ends inclusive);

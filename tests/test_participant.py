@@ -1,4 +1,4 @@
-"""Participant numbers (SPEC 10.1, amendment 11, approved by Ben 2026-10-10): an integer 0 <= p < 2^53 when with_participants, else null/absent."""
+"""Participant numbers (SPEC 10.1): an integer 0 <= p < 2^53 when with_participants, else null/absent."""
 import pytest
 
 from precog_verifier.formats import FormatError, parse_row
