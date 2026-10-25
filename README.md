@@ -112,7 +112,12 @@ them for you.
 
 The three roots are different, so a production release raises no `tsa.same_root` warning. The
 manifest's `release_id` is `live` and `registration_ms` is `1792972800000` (2026-10-26T00:00:00Z), the value in the
-registered study (OSF address: https://osf.io/sqc5n/).
+registered study. The study was registered on OSF on 25 October 2026: registration
+https://osf.io/fqrsu/ (from the OSF project https://osf.io/sqc5n/). The registered file is
+`docs/study-precognition.md`; its SHA-256 is
+`a68cab9bf4aea361f716b64bfdde34abd0c1fa61f668cc1daed3b46af2cf755d` (12,702 bytes). To check the copy in this
+repository against OSF, compare that value with `sha256sum docs/study-precognition.md` (PowerShell:
+`Get-FileHash docs/study-precognition.md -Algorithm SHA256`).
 
 ## 2. Quick start
 
