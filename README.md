@@ -110,10 +110,9 @@ them for you.
 | authority `certum` | `kind: rfc3161`; `root_sha256` `b676f2eddae8775cd36cb0f63cd1d4603961f49e6265ba013a2f0307b6d0b804`; `issuing_ca_sha256` `f882effc16de28d508c092e35825b00242cf963071c279ef09310d9d95784b35` |
 | `with_participants` | `false` |
 
-The three roots are different, so a production release raises no `tsa.same_root` warning. At this date the
-manifest's `release_id` is `beta` and `registration_ms` is a placeholder far in the future (`4102444800000`, the
-year 2100), so every batch counts as pre-registration until the real value is set; compare it with the registered
-date when there is one.
+The three roots are different, so a production release raises no `tsa.same_root` warning. The
+manifest's `release_id` is `live` and `registration_ms` is `1792972800000` (2026-10-26T00:00:00Z), the value in the
+registered study (OSF address: https://osf.io/sqc5n/).
 
 ## 2. Quick start
 
@@ -182,15 +181,14 @@ The public site serves the export at `https://psicensus.com/export/*`
 
 ```
 python -m precog_verifier fetch https://psicensus.com ./release
-python -m precog_verifier verify-release ./release --require-production
+python -m precog_verifier verify-release ./release --require-production --registration-ms 1792972800000
 ```
 
 `--registration-ms <ms>` is optional: it fails the run with `manifest.registration_mismatch` when the manifest's
-`registration_ms` differs from the value you pass (SPEC 11.3). No such value exists before the study is
-registered, so run without the flag for now; the value will be published with the registered study.
+`registration_ms` differs from the value you pass (SPEC 11.3). The registered value is `1792972800000`.
 
-What to expect today: the study is not registered yet, so the manifest's `registration_ms` is the far-future
-placeholder and every player row counts as pre-registration. The analysis line therefore shows `n_batches=0`, and the
+What to expect today: batches sealed before the registration time are excluded; the analysis line shows
+`n_batches=0` until a player batch is sealed after it, and the
 warnings `canary.unverified count=4` and `ots.late count=1` and the line `permutation unavailable code=permutation.too_few`
 are expected in today's record.
 
@@ -460,7 +458,7 @@ All of the numbers come from one release directory and this code; there is no hi
 
 ## 5. The pre-registered analysis
 
-The full text is added to this repository as `docs/study-precognition.md` when the study is registered, and is
+The full text is in this repository as `docs/study-precognition.md`, and is
 published unchanged on OSF at the same time. The verifier implements the primary analysis:
 
 - Unit: one sealed batch of 25 guesses. H0: the pooled hit rate is 20%; H1 (two-sided): it differs from 20%.
@@ -505,7 +503,7 @@ closed or documented in the specification. Do not assume a check exists for them
   Player rows are also checked (SPEC 9.8), and one that carries canary guesses is
   `canary.relabelled` (section 3.8).
 - `registration_ms` comes from the manifest, which the operator writes. The verifier prints
-  `excluded pre_registration` so you can see the number, but it cannot tell whether the date is the registered one.
+  `excluded pre_registration` so you can see the number, but it cannot tell whether the date is the registered one unless you pass `--registration-ms 1792972800000`.
 - Mock authorities and the mock beacon are accepted, with a warning (an error with `--require-production`); the
   tool does not compare the manifest with the expected production values (section 1, item 7).
 - Two authorities with different `id`s but the same operator count as two. The same `root_sha256` gives the warning
@@ -531,4 +529,4 @@ To report a suspected vulnerability privately, use the repository's **Security**
 
 ## Continuous checks
 
-Two GitHub Actions workflows run in this repository. `ci.yml` runs on every push and pull request: it installs the package, runs the test suite and verifies the bundled sample release. `nightly.yml` runs once a day (and on request): it runs `tools/nightly_verify.py`, which downloads the live export from https://psicensus.com with this repository's downloader (the code behind `python -m precog_verifier fetch`), verifies it with `verify-release --require-production` judged at the time the download started, and writes a report that is kept as a run artifact. The Bitcoin block headers and the OpenTimestamps proofs already downloaded are kept between runs in the Actions cache; this only saves requests to the public explorers and the site, and the verifier checks every header and proof itself. A red nightly run means the download or the verification failed; the report says which, and the run opens (or comments on) one issue titled "Nightly verification failed".
+Two GitHub Actions workflows run in this repository. `ci.yml` runs on every push and pull request: it installs the package, runs the test suite and verifies the bundled sample release. `nightly.yml` runs once a day (and on request): it runs `tools/nightly_verify.py`, which downloads the live export from https://psicensus.com with this repository's downloader (the code behind `python -m precog_verifier fetch`), verifies it with `verify-release --require-production --registration-ms 1792972800000` judged at the time the download started, and writes a report that is kept as a run artifact. The Bitcoin block headers and the OpenTimestamps proofs already downloaded are kept between runs in the Actions cache; this only saves requests to the public explorers and the site, and the verifier checks every header and proof itself. A red nightly run means the download or the verification failed; the report says which, and the run opens (or comments on) one issue titled "Nightly verification failed".

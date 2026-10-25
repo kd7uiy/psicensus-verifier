@@ -63,6 +63,7 @@ jobs:
           mkdir -p out
           python tools/nightly_verify.py --base-url https://psicensus.com \
             --btc-headers-cache btc-cache/btc_headers.jsonl --ots-cache ots-cache \
+            --registration-ms 1792972800000 \
             --report out/report.json --summary out/summary.md
       - name: Publish the summary
         if: always()
